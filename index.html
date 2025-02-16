@@ -1,3 +1,42 @@
+Composer Website Github
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,53 +48,31 @@
     body { background-color: #fff; font-family: 'Roboto', sans-serif; margin: 0; color: #333; }
     header { position: relative; height: 100vh; overflow: hidden; }
     header img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: -1; }
-    .overlay { background: rgba(0,0,0,0.6); color: #fff; padding: 40px; text-align: left; position: absolute; top: 50%; left: 10%; width: 40%; transform: translateY(-50%); }
-    .overlay h1 { font-size: 3em; margin-bottom: 10px; }
-    .overlay p { font-size: 1.2em; line-height: 1.5; }
-    nav { display: flex; justify-content: center; gap: 30px; padding: 20px; border-top: 1px solid #ccc; }
-    nav a { text-decoration: none; color: #333; font-weight: 700; }
-    section { padding: 40px; max-width: 1200px; margin: auto; }
-    .credits, .compositions { display: flex; gap: 50px; justify-content: space-around; }
-    .credits h2, .compositions h2 { text-transform: uppercase; margin-bottom: 20px; }
-    ul { list-style: none; padding: 0; }
-    li { margin-bottom: 10px; }
-    footer { text-align: center; padding: 20px; background: #111; color: #fff; }
+    .carousel { position: relative; width: 60%; margin: auto; top: 20%; background: rgba(0,0,0,0.6); color: #fff; padding: 20px; }
+    .slide { display: none; }
+    .active { display: block; }
+    .dots { text-align: center; padding: 10px; }
+    .dot { height: 10px; width: 10px; margin: 0 5px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer; }
+    .active-dot { background-color: #717171; }
+    nav, section, footer { padding: 40px; max-width: 1200px; margin: auto; }
   </style>
 </head>
 <body>
   <header>
-    <img src="/Users/charlie/Desktop/Website/CharlieDiggleMusic/charledigglemusic3/0f0e1b_5efbf4b11d4345f4a7845b41365b7205~mv2_1.jpg" alt="Charlie Diggle in studio" />
-    <div class="overlay">
-      <h1>CHARLIE DIGGLE</h1>
-      <p>Composer and Audio Professional with over a decade of experience delivering award-winning scores and audio for short films.</p>
+    <img src="image.jpg" alt="Charlie Diggle in studio" />
+    <div class="carousel">
+      <div class="slide active"> <h1>CHARLIE DIGGLE</h1> <p>Composer and Audio Professional...</p> </div>
+      <div class="slide"> <img src="slide2.jpg" alt="The Experimental Philosopher" /> </div>
+      <div class="slide"> <img src="slide3.jpg" alt="Slide 3" /> </div>
+      <div class="slide"> <img src="slide4.jpg" alt="Slide 4" /> </div>
+      <div class="slide"> <img src="slide5.jpg" alt="Slide 5" /> </div>
+      <div class="dots"> <span class="dot active-dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span> </div>
     </div>
   </header>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#credits">Music and Credits</a>
-    <a href="#info">Info</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <section class="credits">
-    <div>
-      <h2>Credits</h2>
-      <ul>
-        <li>The Blunt End</li>
-        <li>Annallium 8</li>
-        <li>The Object</li>
-      </ul>
-    </div>
-    <div>
-      <h2>Compositions</h2>
-      <ul>
-        <li>Before I'm Gone</li>
-        <li>Beyond the Horizon</li>
-        <li>Temple</li>
-      </ul>
-    </div>
-  </section>
-  <footer>
-    © 2025 Charlie Diggle | Composer
-  </footer>
+  <section class="credits"> <!-- Existing credits and compositions content here --> </section>
+  <footer>© 2025 Charlie Diggle | Composer</footer>
+  <script>/* JavaScript for carousel navigation */</script>
 </body>
 </html>
+
+
