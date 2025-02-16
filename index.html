@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,31 +6,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Charlie Diggle | Composer</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background-color: #fff; font-family: 'Roboto', sans-serif; margin: 0; color: #333; }
+    header { position: relative; height: 100vh; overflow: hidden; }
+    header img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: -1; }
+    .overlay { background: rgba(0,0,0,0.6); color: #fff; padding: 40px; text-align: center; position: relative; top: 50%; transform: translateY(-50%); }
+    .overlay h1 { font-size: 3em; margin-bottom: 10px; }
+    .overlay p { font-size: 1.2em; line-height: 1.5; }
+    nav { display: flex; justify-content: center; gap: 30px; padding: 20px; border-top: 1px solid #ccc; }
+    nav a { text-decoration: none; color: #333; font-weight: 700; }
+    section { padding: 40px; max-width: 1200px; margin: auto; }
+    .credits, .compositions { display: flex; gap: 50px; justify-content: space-around; }
+    .credits h2, .compositions h2 { text-transform: uppercase; margin-bottom: 20px; }
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 10px; }
+    footer { text-align: center; padding: 20px; background: #111; color: #fff; }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Charlie Diggle | Composer</h1>
-    <nav>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#bio">Bio</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <img src="/Users/charlie/Desktop/Website/CharlieDiggleMusic/charledigglemusic3/0f0e1b_5efbf4b11d4345f4a7845b41365b7205~mv2_1.jpg" alt="Charlie Diggle in studio" />
+    <div class="overlay">
+      <h1>CHARLIE DIGGLE</h1>
+      <p>Composer and Audio Professional with over a decade of experience delivering award-winning scores and audio for short films.</p>
+    </div>
   </header>
-  <section id="portfolio">
-    <h2>Portfolio</h2>
-    <p>Showcase of compositions, short film projects, and game scores.</p>
-  </section>
-  <section id="bio">
-    <h2>About Me</h2>
-    <p>Charlie Diggle is a passionate composer with experience in short films and an aim to work in game music.</p>
-  </section>
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: charliediggle@example.com</p>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#credits">Music and Credits</a>
+    <a href="#info">Info</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <section class="credits">
+    <div>
+      <h2>Credits</h2>
+      <ul>
+        <li>The Blunt End</li>
+        <li>Annallium 8</li>
+        <li>The Object</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Compositions</h2>
+      <ul>
+        <li>Before I'm Gone</li>
+        <li>Beyond the Horizon</li>
+        <li>Temple</li>
+      </ul>
+    </div>
   </section>
   <footer>
-    <p>© 2025 Charlie Diggle</p>
+    © 2025 Charlie Diggle | Composer
   </footer>
 </body>
 </html>
+
+
