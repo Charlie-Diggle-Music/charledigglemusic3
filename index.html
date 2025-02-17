@@ -8,22 +8,28 @@
   <style>
     body { background-color: #fff; font-family: 'Roboto', sans-serif; margin: 0; color: #333; }
     header { position: relative; height: 100vh; overflow: hidden; }
-    .carousel { position: absolute; top: 255px; left: 764px; width: 696px; height: 500px; background: rgba(0,0,0,0.6); color: #fff; }
-    .slide { display: none; width: 100%; height: 100%; }
+    .carousel { position: absolute; top: 255px; left: 764px; width: 696px; height: 500px; color: #fff; }
+    .slide { display: none; width: 100%; height: 100%; text-align: center; padding: 50px; box-sizing: border-box; }
+    .slide h1 { font-size: 60px; color: #fff; margin-bottom: 20px; }
+    .slide h2 { font-size: 30px; background-color: red; color: #fff; display: inline-block; padding: 10px 20px; margin-bottom: 20px; }
+    .slide p { font-size: 18px; color: #fff; margin: 0 auto; max-width: 90%; }
+    .slide p .highlight { color: red; font-weight: bold; }
     .slide img { width: 100%; height: 100%; object-fit: cover; }
     .active { display: block; }
     .dots { text-align: center; padding: 10px; position: absolute; bottom: 0px; width: 100%; }
     .dot { height: 10px; width: 10px; margin: 0 5px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer; }
     .active-dot { background-color: #717171; }
-    nav, section, footer { padding: 40px; max-width: 1200px; margin: auto; }
   </style>
 </head>
 <body>
   <header>
     <div class="carousel">
-      <div class="slide active"> <h1>CHARLIE DIGGLE</h1> <p>Composer and Audio Professional</p> Charlie Diggle is a composer, sound designer and mixing engineer.  With over a decade of experience he has composed, produced, mixed and delivered scores and audio for several award winning short films. 
- </div>
-      <div class="slide"> <img src="/Users/charlie/Desktop/Website/CharlieDiggleMusic/charledigglemusic3/0f0e1b_8a384dcd87a247dd8bfe62cb230c7a5b~mv2.jpg-2.avif" alt="Slide 2" /> </div>
+      <div class="slide active"> 
+        <h1>CHARLIE DIGGLE</h1>
+        <h2>COMPOSER AND AUDIO PROFESSIONAL</h2>
+        <p>Charlie Diggle is a composer, sound designer and mixing engineer. With over a decade of experience he has composed, produced, mixed and delivered scores and audio for several <span class="highlight">AWARD WINNING</span> short films.</p>
+      </div>
+      <div class="slide"> <img src="slide2.jpg" alt="Slide 2" /> </div>
       <div class="slide"> <img src="slide3.jpg" alt="Slide 3" /> </div>
       <div class="slide"> <img src="slide4.jpg" alt="Slide 4" /> </div>
       <div class="slide"> <img src="slide5.jpg" alt="Slide 5" /> </div>
