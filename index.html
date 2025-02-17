@@ -9,6 +9,28 @@
     body { background-color: #fff; font-family: 'Roboto', sans-serif; margin: 0; color: #333; }
     header { position: relative; height: 100vh; overflow: hidden; }
     header img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: -1; }
+    .carousel { position: relative; width: 60%; height: 400px; margin: auto; top: 20%; background: rgba(0,0,0,0.6); color: #fff; padding: 20px; box-sizing: border-box; }
+    .slide { display: none; height: 100%; }
+    .active { display: block; height: 100%; }
+    .dots { text-align: center; padding: 10px; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); }
+    .dot { height: 10px; width: 10px; margin: 0 5px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer; }
+    .active-dot { background-color: #717171; }
+    nav, section, footer { padding: 40px; max-width: 1200px; margin: auto; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charlie Diggle | Composer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body { background-color: #fff; font-family: 'Roboto', sans-serif; margin: 0; color: #333; }
+    header { position: relative; height: 100vh; overflow: hidden; }
+    header img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: -1; }
     .carousel { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 60%; height: 500px; background: rgba(0,0,0,0.6); color: #fff; padding: 20px; box-sizing: border-box; }
     .slide { display: none; height: 100%; }
     .active { display: block; height: 100%; }
@@ -63,6 +85,36 @@
       currentSlide = (currentSlide + 1) % slides.length;
       showSlide(currentSlide);
     }, 3000);
+  </script>
+</body>
+</html>
+" alt="Charlie Diggle in studio" />
+    <div class="carousel">
+      <div class="slide active"> <h1>CHARLIE DIGGLE</h1> <p>Composer and Audio Professional...</p> </div>
+      <div class="slide"> <img src="slide2.jpg" alt="The Experimental Philosopher" /> </div>
+      <div class="slide"> <img src="slide3.jpg" alt="Slide 3" /> </div>
+      <div class="slide"> <img src="slide4.jpg" alt="Slide 4" /> </div>
+      <div class="dots"> <span class="dot active-dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span> </div>
+    </div>
+  </header>
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.style.display = 'none');
+      dots.forEach(dot => dot.classList.remove('active-dot'));
+      slides[index].style.display = 'block';
+      dots[index].classList.add('active-dot');
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+      });
+    });
   </script>
 </body>
 </html>
