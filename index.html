@@ -1,3 +1,64 @@
+Composer Website Github
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +70,10 @@
     body { background-color: #fff; font-family: 'Roboto', sans-serif; margin: 0; color: #333; }
     header { position: relative; height: 100vh; overflow: hidden; }
     header img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: -1; }
-    .carousel { position: relative; width: 60%; height: 400px; margin: auto; top: 20%; background: rgba(0,0,0,0.6); color: #fff; padding: 20px; box-sizing: border-box; }
-    .slide { display: none; height: 100%; }
-    .active { display: block; height: 100%; }
-    .dots { text-align: center; padding: 10px; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); }
+    .carousel { position: relative; width: 60%; margin: auto; top: 20%; background: rgba(0,0,0,0.6); color: #fff; padding: 20px; }
+    .slide { display: none; height: 400px; }
+    .active { display: block; }
+    .dots { text-align: center; padding: 10px; }
     .dot { height: 10px; width: 10px; margin: 0 5px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer; }
     .active-dot { background-color: #717171; }
     nav, section, footer { padding: 40px; max-width: 1200px; margin: auto; }
@@ -20,45 +81,16 @@
 </head>
 <body>
   <header>
-    <img src="<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Charlie Diggle | Composer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    body { background-color: #fff; font-family: 'Roboto', sans-serif; margin: 0; color: #333; }
-    header { position: relative; height: 100vh; overflow: hidden; }
-    header img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: -1; }
-    .carousel { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 60%; height: 500px; background: rgba(0,0,0,0.6); color: #fff; padding: 20px; box-sizing: border-box; }
-    .slide { display: none; height: 100%; }
-    .active { display: block; height: 100%; }
-    .dots { text-align: center; padding: 10px; }
-    .dot { height: 10px; width: 10px; margin: 0 5px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer; }
-    .active-dot { background-color: #717171; }
-    nav { display: flex; justify-content: center; gap: 30px; background: #f9f9f9; padding: 15px; }
-    nav a { text-decoration: none; color: #333; font-weight: 700; }
-    .credits-compositions { display: flex; justify-content: space-around; padding: 40px; }
-  </style>
-</head>
-<body>
-  <header>
-    <img src="/Users/charlie/Desktop/Website/CharlieDiggleMusic/charledigglemusic3/0f0e1b_5efbf4b11d4345f4a7845b41365b7205~mv2_1.jpg" alt="Charlie Diggle in studio" />
     <div class="carousel">
       <div class="slide active"> <h1>CHARLIE DIGGLE</h1> <p>Composer and Audio Professional...</p> </div>
-      <div class="slide"> <img src="slide2.jpg" alt="The Experimental Philosopher" /> </div>
-      <div class="slide"> <img src="slide3.jpg" alt="Slide 3" /> </div>
-      <div class="slide"> <img src="slide4.jpg" alt="Slide 4" /> </div>
+      <div class="slide"> <img src="/path-to-image2.jpg" alt="The Experimental Philosopher" /> </div>
+      <div class="slide"> <img src="/path-to-image3.jpg" alt="Slide 3" /> </div>
+      <div class="slide"> <img src="/path-to-image4.jpg" alt="Slide 4" /> </div>
       <div class="dots"> <span class="dot active-dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span> </div>
     </div>
   </header>
   <nav>
-    <a href="#">Home</a>
-    <a href="#">Music</a>
-    <a href="#">Credits</a>
-    <a href="#">Info</a>
-    <a href="#">Contact</a>
+    <a href="#home">Home</a> | <a href="#music">Music</a> | <a href="#credits">Credits</a> | <a href="#info">Info</a> | <a href="#contact">Contact</a>
   </nav>
   <section class="credits-compositions">
     <div class="credits"><h2>CREDITS</h2> <!-- Credits list here --> </div>
@@ -71,44 +103,12 @@
     let currentSlide = 0;
     function showSlide(index) {
       slides.forEach((slide, i) => {
-        slide.style.display = (i === index) ? 'block' : 'none';
+        slide.style.display = i === index ? 'block' : 'none';
       });
       dots.forEach((dot, i) => {
         dot.classList.toggle('active-dot', i === index);
       });
     }
-    dots.forEach((dot, i) => dot.addEventListener('click', () => {
-      currentSlide = i;
-      showSlide(currentSlide);
-    }));
-    setInterval(() => {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    }, 3000);
-  </script>
-</body>
-</html>
-" alt="Charlie Diggle in studio" />
-    <div class="carousel">
-      <div class="slide active"> <h1>CHARLIE DIGGLE</h1> <p>Composer and Audio Professional...</p> </div>
-      <div class="slide"> <img src="slide2.jpg" alt="The Experimental Philosopher" /> </div>
-      <div class="slide"> <img src="slide3.jpg" alt="Slide 3" /> </div>
-      <div class="slide"> <img src="slide4.jpg" alt="Slide 4" /> </div>
-      <div class="dots"> <span class="dot active-dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span> </div>
-    </div>
-  </header>
-  <script>
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let currentSlide = 0;
-
-    function showSlide(index) {
-      slides.forEach(slide => slide.style.display = 'none');
-      dots.forEach(dot => dot.classList.remove('active-dot'));
-      slides[index].style.display = 'block';
-      dots[index].classList.add('active-dot');
-    }
-
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         currentSlide = index;
@@ -118,3 +118,5 @@
   </script>
 </body>
 </html>
+
+
