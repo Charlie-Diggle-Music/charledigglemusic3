@@ -58,10 +58,6 @@ Composer Website Github
 57
 58
 59
-60
-61
-62
-63
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,8 +68,7 @@ Composer Website Github
   <style>
     body { background-color: #fff; font-family: 'Roboto', sans-serif; margin: 0; color: #333; }
     header { position: relative; height: 100vh; overflow: hidden; }
-    header img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: -1; }
-    .carousel { position: relative; width: 60%; margin: auto; top: 20%; background: rgba(0,0,0,0.6); color: #fff; padding: 20px; height: 400px; }
+    .carousel { position: relative; width: 60%; margin: auto; top: 20%; background: rgba(0,0,0,0.6); color: #fff; padding: 20px; height: 400px; box-sizing: border-box; }
     .slide { display: none; height: 100%; }
     .active { display: block; }
     .dots { text-align: center; padding: 10px; position: absolute; bottom: 10px; width: 100%; }
@@ -86,10 +81,10 @@ Composer Website Github
   <header>
     <div class="carousel">
       <div class="slide active"> <h1>CHARLIE DIGGLE</h1> <p>Composer and Audio Professional...</p> </div>
-      <div class="slide"> <img src="/path/to/experimental-philosopher.jpg" alt="The Experimental Philosopher" style="width:100%; height:100%; object-fit:cover;" /> </div>
-      <div class="slide"> <img src="slide3.jpg" alt="Slide 3" style="width:100%; height:100%; object-fit:cover;" /> </div>
-      <div class="slide"> <img src="slide4.jpg" alt="Slide 4" style="width:100%; height:100%; object-fit:cover;" /> </div>
-      <div class="slide"> <img src="slide5.jpg" alt="Slide 5" style="width:100%; height:100%; object-fit:cover;" /> </div>
+      <div class="slide"> <img src="/path/to/experimental-philosopher.jpg" alt="The Experimental Philosopher" style="width:100%; height:100%; object-fit:cover; border: none;" /> </div>
+      <div class="slide"> <img src="slide3.jpg" alt="Slide 3" style="width:100%; height:100%; object-fit:cover; border: none;" /> </div>
+      <div class="slide"> <img src="slide4.jpg" alt="Slide 4" style="width:100%; height:100%; object-fit:cover; border: none;" /> </div>
+      <div class="slide"> <img src="slide5.jpg" alt="Slide 5" style="width:100%; height:100%; object-fit:cover; border: none;" /> </div>
       <div class="dots"> <span class="dot active-dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span> </div>
     </div>
   </header>
@@ -103,7 +98,6 @@ Composer Website Github
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
     let currentSlide = 0;
-
     function showSlide(index) {
       slides.forEach((slide, i) => {
         slide.style.display = i === index ? 'block' : 'none';
@@ -112,14 +106,12 @@ Composer Website Github
         dot.className = i === index ? 'dot active-dot' : 'dot';
       });
     }
-
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         currentSlide = index;
         showSlide(currentSlide);
       });
     });
-
     showSlide(currentSlide);
   </script>
 </body>
