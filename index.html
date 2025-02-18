@@ -74,6 +74,7 @@ Composer Website Github
 73
 74
 75
+76
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,7 +99,9 @@ Composer Website Github
   <header>
     <div class="carousel">
       <div class="slide active"> <img src="Screenshot 2025-02-18 at 18.57.11.png" alt="Slide 1" /> </div>
-      <div class="slide video-slide"> <iframe src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> </div>
+      <div class="slide video-slide">
+        <iframe src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1" frameborder="0" allow="autoplay; fullscreen;" allowfullscreen></iframe>
+      </div>
       <div class="slide"> <img src="0f0e1b_f11e88607215468aa654a0a8c7dc8db1~mv2.jpg.avif" /> </div>
       <div class="slide"> <img src="Screenshot 2025-02-18 at 13.41.24.png" alt="Slide 4" /> </div>
       <div class="slide"> <img src="0f0e1b_8a384dcd87a247dd8bfe62cb230c7a5b~mv2.jpg-2.avif" alt="Slide 5" /> </div>
@@ -116,17 +119,15 @@ Composer Website Github
     const dots = document.querySelectorAll('.dot');
     let currentSlide = 0;
     let interval = setInterval(nextSlide, 4000);
-    const vimeo = document.querySelector('.video-slide iframe');
 
     function showSlide(index) {
-      if (slides[currentSlide].classList.contains('video-slide')) {
-        vimeo.contentWindow.postMessage({ method: 'pause' }, '*');
-      }
-      slides.forEach((slide) => slide.classList.remove('active'));
+      slides.forEach((slide, i) => slide.classList.remove('active'));
       slides[index].classList.add('active');
       dots.forEach((dot, i) => dot.className = i === index ? 'dot active-dot' : 'dot');
-      if (slides[index].classList.contains('video-slide')) {
-        vimeo.contentWindow.postMessage({ method: 'play' }, '*');
+      const vimeoIframe = document.querySelector('.video-slide iframe');
+      if (vimeoIframe) {
+        const player = new Vimeo.Player(vimeoIframe);
+        if (index !== 1) player.pause();
       }
     }
 
@@ -147,6 +148,7 @@ Composer Website Github
 
     showSlide(currentSlide);
   </script>
+  <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
 
