@@ -1,22 +1,95 @@
+Composer Website Github
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Charlie Diggle | Composer</title>
-  <link href="/Users/charlie/Desktop/Website/CharlieDiggleMusic/charledigglemusic3/0f0e1b_5efbf4b11d4345f4a7845b41365b7205~mv2_1.jpg" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body { background-color: #fff; font-family: 'Roboto', sans-serif; margin: 0; color: #333; }
-    header { position: relative; height: 100vh; overflow: hidden; background-image: url('background.jpg'); background-size: cover; background-position: center; }
+    header { position: relative; height: 100vh; overflow: hidden; background-image: url('/Users/charlie/Desktop/Website/CharlieDiggleMusic/charledigglemusic3/0f0e1b_5efbf4b11d4345f4a7845b41365b7205~mv2_1.jpg'); background-size: cover; background-position: center; }
     .carousel { position: absolute; top: 235px; left: 597px; width: 696px; height: 500px; background: rgba(0,0,0,0.6); color: #fff; transition: background-color 0.3s ease; }
     .carousel::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.0); transition: background 0.3s ease; z-index: 2; }
     .carousel:hover::before { background: rgba(0, 0, 0, 0.1); }
     .slide { opacity: 0; transition: opacity 0.5s ease; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
     .slide img, .slide iframe { width: 100%; height: 100%; object-fit: cover; }
     .slide.active { opacity: 1; }
-    .slide:nth-child(5).active ~ .carousel { background: transparent !important; }
-    .slide:nth-child(5).active ~ .carousel::before { background: transparent !important; }
-    iframe { background: transparent !important; }
+    .slide:nth-child(5) { background: rgba(0,0,0,1); } /* Full opacity for 5th slide */
     .dots { text-align: center; padding: 0px; position: absolute; bottom: 7px; width: 100%; z-index: 3; }
     .dot { height: 10px; width: 10px; margin: 0 3.7px; background-color: #bbb; border-radius: 50%; display: inline-block; cursor: pointer; }
     .active-dot { background-color: #717171; }
