@@ -1,4 +1,84 @@
-
+Composer Website Github
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,27 +124,37 @@
     const dots = document.querySelectorAll('.dot');
     let currentSlide = 0;
     let interval = setInterval(nextSlide, 4000);
+
     function showSlide(index) {
       slides.forEach((slide, i) => slide.classList.remove('active'));
       slides[index].classList.add('active');
       dots.forEach((dot, i) => dot.className = i === index ? 'dot active-dot' : 'dot');
+
+      const video = document.querySelector('.video-slide iframe');
+      if (video) {
+        if (index === 1) {
+          video.src = "https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1";
+        } else {
+          video.contentWindow.postMessage({ method: 'pause' }, '*');
+        }
+      }
     }
+
     function nextSlide() {
       currentSlide = (currentSlide + 1) % slides.length;
       showSlide(currentSlide);
-      const video = document.querySelector('.video-slide iframe');
-      if (video) video.contentWindow.postMessage({ method: 'pause' }, '*');
     }
+
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         currentSlide = index;
         showSlide(currentSlide);
-        const video = document.querySelector('.video-slide iframe');
-        if (video) video.contentWindow.postMessage({ method: 'pause' }, '*');
       });
     });
+
     document.querySelector('.carousel').addEventListener('mouseenter', () => clearInterval(interval));
     document.querySelector('.carousel').addEventListener('mouseleave', () => interval = setInterval(nextSlide, 4000));
+
     showSlide(currentSlide);
   </script>
 </body>
