@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +24,7 @@
     <div class="carousel">
       <div class="slide active"> <img src="Screenshot 2025-02-18 at 18.57.11.png" alt="Slide 1" /> </div>
       <div class="slide video-slide">
-        <iframe src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <iframe id="vimeo-video" src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </div>
       <div class="slide"> <img src="0f0e1b_f11e88607215468aa654a0a8c7dc8db1~mv2.jpg.avif" /> </div>
       <div class="slide"> <img src="Screenshot 2025-02-18 at 13.41.24.png" alt="Slide 4" /> </div>
@@ -44,39 +43,37 @@
     const dots = document.querySelectorAll('.dot');
     let currentSlide = 0;
     let interval = setInterval(nextSlide, 4000);
+    
+    const vimeoVideo = document.getElementById('vimeo-video');
+    vimeoVideo.src += '&autoplay=1&muted=1';
 
     function showSlide(index) {
       slides.forEach((slide, i) => slide.classList.remove('active'));
       slides[index].classList.add('active');
       dots.forEach((dot, i) => dot.className = i === index ? 'dot active-dot' : 'dot');
-
-      const video = document.querySelector('.video-slide iframe');
-      if (video) {
-        if (index === 1) {
-          video.src = "https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1";
-        } else {
-          video.contentWindow.postMessage({ method: 'pause' }, '*');
-        }
-      }
     }
 
     function nextSlide() {
       currentSlide = (currentSlide + 1) % slides.length;
       showSlide(currentSlide);
+      if (currentSlide !== 1 && vimeoVideo) {
+        vimeoVideo.contentWindow.postMessage({ method: 'pause' }, '*');
+      }
     }
 
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         currentSlide = index;
         showSlide(currentSlide);
+        if (currentSlide !== 1 && vimeoVideo) {
+          vimeoVideo.contentWindow.postMessage({ method: 'pause' }, '*');
+        }
       });
     });
 
     document.querySelector('.carousel').addEventListener('mouseenter', () => clearInterval(interval));
     document.querySelector('.carousel').addEventListener('mouseleave', () => interval = setInterval(nextSlide, 4000));
-
     showSlide(currentSlide);
   </script>
 </body>
 </html>
-
