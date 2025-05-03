@@ -8,6 +8,90 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
   <style>
+
+
+
+
+
+.overlay-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none; /* prevents unintended blocking of image interaction */
+}
+.overlay-grid div {
+  background-color: rgba(128, 128, 128, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: auto; /* allows interaction with each individual box */
+}
+
+.overlay-grid div {
+  background-color: rgba(128, 128, 128, 0.8); /* semi-transparent grey */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* Center text horizontally */
+  align-items: center; /* Center text vertically */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  box-sizing: border-box; /* Ensure padding doesn't affect size */
+  padding: 10px; /* Optional: Add padding to prevent text from touching edges */
+  opacity: 0; /* Make the boxes invisible initially */
+  transition: opacity 0.3s ease; /* Smooth transition when the box becomes visible */
+  cursor: pointer; /* Make the boxes look clickable */
+  pointer-events: auto; /* Allow interaction when they are invisible */
+}
+
+
+
+
+
+
+
+
+
+
+
+.fade-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 50px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.fade-container.visible {
+  opacity: 1;
+  max-height: 2000px; /* Large enough to fit content */
+}
+.fade-container img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+
+
 .top-image {
   position: absolute;
   top: 100px;
@@ -19,6 +103,11 @@
   width: 1000px;   /* Change to whatever size you want */
   height: auto;   /* Maintains aspect ratio */
 }
+
+
+
+
+
 
 
 
@@ -121,6 +210,8 @@
       }
     }
 
+
+
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         currentSlide = index;
@@ -136,19 +227,27 @@
     showSlide(currentSlide);
   </script>
 
-</body>
 
 
 
 <script>
-  const moreButton = document.getElementById('moreButton');
-  const extraImages = document.getElementById('extraImages');
-
-  moreButton.addEventListener('click', () => {
-    extraImages.style.display = 'grid';
-    moreButton.style.display = 'none';
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById('toggleMoreBtn').addEventListener('click', function () {
+      const moreGallery = document.getElementById('moreGallery');
+      moreGallery.classList.toggle('visible');
+      this.textContent = moreGallery.classList.contains('visible') ? 'Show Less' : 'Show More';
+    });
   });
 </script>
+
+
+
+
+
+</body>
+
+
+
 
 </body>
 
@@ -158,32 +257,114 @@
 
 <section style="padding: 40px; max-width: 1200px; margin: auto;">
   <h2 style="text-align: center; margin-bottom: 20px;">Gallery</h2>
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-    <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Screenshot%202025-05-01%20at%2014.25.54.png" alt="Gallery image 1" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-    <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/annalium8%20imagee_edited.jpg" alt="Gallery image 2" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-    <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/TLBROCAM%20Square.png" alt="Gallery image 3" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-    <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/The%20Walker%20Square.png" alt="Gallery image 4" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-    <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/in%20another%20life.png" alt="Gallery image 5" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-    <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Coronation%20Square.png" alt="Gallery image 6" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-    <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Bar%20Watch%20Square.png" alt="Gallery image 7" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-    <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Object.jpg" alt="Gallery image 8" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-     <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Mark_edited.jpg" alt="Gallery image 9" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
+
+  <div class="gallery-wrapper" style="position: relative;">
+    <!-- NEW OVERLAY GRID -->
+    <div class="overlay-grid">
+      <div>Film - On the Blunt End <Br> <Br> Release Date - TBC <Br> <Br> Role(s) - HOD (Sound), Composer, Sound Designer, Production Mixer <Br> <Br> 
+
+        <a href="https://example.com" target="_blank">More Information</a>       </div>
+
+
+
+   <div>Film - On the Blunt End <Br> <Br> Release Date - TBC <Br> <Br> Role(s) - HOD (Sound), Composer, Sound Designer, Production Mixer <Br> <Br> 
+
+        <a href="https://example.com" target="_blank">More Information</a>       </div>
+
+
+
+      <div>Film - On the Blunt End <Br> <Br> Release Date - TBC <Br> <Br> Role(s) - HOD (Sound), Composer, Sound Designer, Production Mixer <Br> <Br> 
+
+        <a href="https://example.com" target="_blank">More Information</a>       </div>
+
+      <div>Film - On the Blunt End <Br> <Br> Release Date - TBC <Br> <Br> Role(s) - HOD (Sound), Composer, Sound Designer, Production Mixer <Br> <Br> 
+
+        <a href="https://example.com" target="_blank">More Information</a>       </div>
+ <div>Film - On the Blunt End <Br> <Br> Release Date - TBC <Br> <Br> Role(s) - HOD (Sound), Composer, Sound Designer, Production Mixer <Br> <Br> 
+
+        <a href="https://example.com" target="_blank">More Information</a>       </div>
+ <div>Film - On the Blunt End <Br> <Br> Release Date - TBC <Br> <Br> Role(s) - HOD (Sound), Composer, Sound Designer, Production Mixer <Br> <Br> 
+
+        <a href="https://example.com" target="_blank">More Information</a>       </div>
+ <div>Film - On the Blunt End <Br> <Br> Release Date - TBC <Br> <Br> Role(s) - HOD (Sound), Composer, Sound Designer, Production Mixer <Br> <Br> 
+
+        <a href="https://example.com" target="_blank">More Information</a>       </div>
+ <div>Film - On the Blunt End <Br> <Br> Release Date - TBC <Br> <Br> Role(s) - HOD (Sound), Composer, Sound Designer, Production Mixer <Br> <Br> 
+
+        <a href="https://example.com" target="_blank">More Information</a>       </div>
+ <div>Film - On the Blunt End <Br> <Br> Release Date - TBC <Br> <Br> Role(s) - HOD (Sound), Composer, Sound Designer, Production Mixer <Br> <Br> 
+
+        <a href="https://example.com" target="_blank">More Information</a>       </div>
+
+    </div>
+
+    <!-- EXISTING 3x3 GALLERY GRID -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Blunt%20End.png" alt="Gallery image 1" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/annalium8%20imagee_edited.jpg" alt="Gallery image 2" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/TLBROCAM%20Square.png" alt="Gallery image 3" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/The%20Walker%20Square.png" alt="Gallery image 4" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/in%20another%20life.png" alt="Gallery image 5" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Coronation%20Square.png" alt="Gallery image 6" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Bar%20Watch%20Square.png" alt="Gallery image 7" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Object.jpg" alt="Gallery image 8" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Mark_edited.jpg" alt="Gallery image 9" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
+    </div>
+  </div>
+
+
+
+
+<button id="toggleMoreBtn" style="margin: 30px auto; display: block;">Show More</button>
+
+<div id="moreGallery" class="fade-container">
+  <img src="https://via.placeholder.com/300x300?text=Extra+1" alt="Extra Image 1" />
+  <img src="https://via.placeholder.com/300x300?text=Extra+2" alt="Extra Image 2" />
+  <img src="https://via.placeholder.com/300x300?text=Extra+3" alt="Extra Image 3" />
+  <img src="https://via.placeholder.com/300x300?text=Extra+4" alt="Extra Image 4" />
+  <img src="https://via.placeholder.com/300x300?text=Extra+5" alt="Extra Image 5" />
+  <img src="https://via.placeholder.com/300x300?text=Extra+6" alt="Extra Image 6" />
 </div>
 
-<!-- "More / Less" Button -->
-<div style="text-align: center; margin-top: 30px;">
-  <button id="toggleButton" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">More</button>
-</div>
 
-<!-- Hidden Extra Images -->
-<div id="extraImages" style="display: none; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px;" class="extra-gallery">
-  <img src="https://via.placeholder.com/400x400?text=Extra+1" alt="Extra image 1" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-  <img src="https://via.placeholder.com/400x400?text=Extra+2" alt="Extra image 2" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-  <img src="https://via.placeholder.com/400x400?text=Extra+3" alt="Extra image 3" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-  <img src="https://via.placeholder.com/400x400?text=Extra+4" alt="Extra image 4" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-  <img src="https://via.placeholder.com/400x400?text=Extra+5" alt="Extra image 5" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-  <img src="https://via.placeholder.com/400x400?text=Extra+6" alt="Extra image 6" style="width: 100%; aspect-ratio: 1; object-fit: cover;" />
-</div>
+
+
+
+
+
+</section>
+
+
+
+<script>
+// Make grey boxes clickable to toggle visibility
+document.querySelectorAll('.overlay-grid div').forEach((box) => {
+  box.addEventListener('click', () => {
+    // Get current opacity value dynamically
+    const currentOpacity = window.getComputedStyle(box).opacity;
+
+    if (currentOpacity === '1') {
+      // If the box is visible, make it invisible
+      box.style.opacity = '0';  
+    } else {
+      // If the box is invisible, make it visible
+      box.style.opacity = '1';  
+    }
+  });
+
+  // Ensure the boxes start with opacity 0 and pointer-events enabled
+  box.style.opacity = '0';  
+  box.style.pointerEvents = 'auto';  
+});
+</script>
+
+
+
+
+
+
+
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -191,9 +372,8 @@
     const extraImages = document.getElementById('extraImages');
 
     toggleButton.addEventListener('click', () => {
-      const isVisible = extraImages.style.display === 'grid';
-      extraImages.style.display = isVisible ? 'none' : 'grid';
-      toggleButton.textContent = isVisible ? 'More' : 'Less';
+      extraImages.classList.toggle('visible');
+      toggleButton.textContent = extraImages.classList.contains('visible') ? 'Less' : 'More';
     });
   });
 </script>
