@@ -1,350 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Charlie Diggle | Composer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Carousel</title>
   <style>
-    /* General Styles */
+    /* General Styling */
     body {
-      background-color: #fff;
-      font-family: 'Roboto', sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
-      color: #333;
+      padding: 0;
+      background-color: #f9f9f9;
     }
 
-    header {
-      position: relative;
-      height: 150vh;
-      overflow: hidden;
-      background: url('https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/look%20out%203.png') center top / cover no-repeat;
-    }
-
-    .social-bar {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 15px;
-      z-index: 20;
-    }
-
-    .social-bar a {
-      color: #fff;
-      font-size: 24px;
-      text-decoration: none;
-      transition: transform 0.3s;
-    }
-
-    .social-bar a:hover {
-      transform: scale(1.2);
-    }
-
-    .top-image {
-      position: absolute;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 30;
-    }
-
-    .top-image img {
-      width: 100%;
-      max-width: 1000px;
-      height: auto;
-    }
-
-    /* Carousel */
     .carousel {
-      position: absolute;
-      top: 600px;
-      left: 50%;
-      transform: translateX(-50%);
+      position: relative;
       width: 90%;
-      max-width: 820px;
-      height: 525px;
+      max-width: 800px;
+      margin: 0 auto;
       overflow: hidden;
+      /* Maintain aspect ratio for modern browsers */
+      aspect-ratio: 16 / 9;
     }
 
-    .slide {
-      opacity: 0;
-      transition: opacity 1.5s ease;
+    /* Fallback for older browsers */
+    .carousel::before {
+      content: "";
+      display: block;
+      padding-top: 56.25%; /* 16:9 ratio (9/16 = 0.5625) */
+    }
+
+    .carousel-content {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
+      display: flex;
+      transition: transform 0.5s ease-in-out;
     }
 
-    .slide.active {
-      opacity: 1;
-      z-index: 1;
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
     }
 
     .slide img,
     .slide iframe {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
 
-    .dots {
-      text-align: center;
+    /* Pagination Dots */
+    .carousel-dots {
       position: absolute;
       bottom: 10px;
-      width: 100%;
-      z-index: 10;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      gap: 10px;
     }
 
     .dot {
-      height: 10px;
-      width: 10px;
-      margin: 0 5px;
-      background-color: #fff;
+      width: 12px;
+      height: 12px;
+      background-color: #ccc;
       border-radius: 50%;
-      display: inline-block;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
 
-    .active-dot {
-      background-color: #717171;
+    .dot.active {
+      background-color: #333;
     }
 
-    /* Gallery Grid */
-    .gallery-wrapper {
-      padding: 40px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .overlay-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .grid-item {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .grid-item img {
-      width: 100%;
-      aspect-ratio: 1; /* Ensures square images */
-      object-fit: cover;
-    }
-
-    .grid-item .info-box {
+    /* Navigation Buttons */
+    .carousel-button {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%; /* Covers the entire image */
-      background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-      font-size: 16px;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 18px;
     }
 
-    .grid-item.active .info-box {
-      opacity: 1;
-      visibility: visible;
+    .carousel-button.prev {
+      left: 10px;
     }
 
-    /* Show More Section */
-    .fade-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: opacity 0.5s ease, max-height 0.5s ease;
-    }
-
-    .fade-container.visible {
-      opacity: 1;
-      max-height: 2000px;
-    }
-
-    .fade-container img {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .overlay-grid,
-      .fade-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .overlay-grid,
-      .fade-container {
-        grid-template-columns: repeat(1, 1fr);
-      }
-
-      .social-bar a {
-        font-size: 18px;
-      }
+    .carousel-button.next {
+      right: 10px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="top-image">
-      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/New%20Logo%20Cropped.png" alt="New Image" />
-    </div>
-    <div class="social-bar">
-      <a href="https://open.spotify.com/artist/2WVq07g2OwtjJrtWMKddCk?si=6wppj59UQUCi6eFCK1a2aQ" target="_blank" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
-      <a href="https://www.instagram.com/charliedigglemusic/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.youtube.com/channel/UC7D4yueffy8w-W7AYIqYAqQ" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.imdb.com/name/nm8530058/?ref_=fn_al_nm_1" target="_blank"><i class="fab fa-imdb"></i></a>
-      <a href="https://www.linkedin.com/in/charlie-diggle-77aa4a196" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    </div>
-    <div class="carousel">
-      <div class="slide active">
-        <iframe id="vimeo-video" src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <div class="carousel">
+    <div class="carousel-content">
+      <div class="slide">
+        <iframe src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </div>
-      <div class="slide"><img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/foow-card.jpg" alt="Slide 2" /></div>
-      <div class="slide"><img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Blunt%20End.png" alt="Slide 3" /></div>
-      <div class="dots">
-        <span class="dot active-dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+      <div class="slide">
+        <img src="https://via.placeholder.com/800x450.png?text=Slide+2" alt="Slide 2">
+      </div>
+      <div class="slide">
+        <img src="https://via.placeholder.com/800x450.png?text=Slide+3" alt="Slide 3">
       </div>
     </div>
-  </header>
-  <section class="gallery-wrapper">
-    <h2>Gallery</h2>
-    <div class="overlay-grid">
-      <!-- First 9 Images -->
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Blunt%20End.png" alt="Gallery Image 1" />
-        <div class="info-box">The Blunt End<br>Role(s): Composer, Sound Designer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Fish%20out%20of%20water%20square.png" alt="Gallery Image 2" />
-        <div class="info-box">Fish Out of Water<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/TLBROCAM%20Square.png" alt="Gallery Image 3" />
-        <div class="info-box">TLBROCAM<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/The%20Walker%20Square.png" alt="Gallery Image 4" />
-        <div class="info-box">The Walker<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/in%20another%20life.png" alt="Gallery Image 5" />
-        <div class="info-box">In Another Life<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Coronation%20Square.png" alt="Gallery Image 6" />
-        <div class="info-box">Coronation Square<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Bar%20Watch%20Square.png" alt="Gallery Image 7" />
-        <div class="info-box">Bar Watch<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Object.jpg" alt="Gallery Image 8" />
-        <div class="info-box">The Object<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/annalium8%20imagee_edited.jpg" alt="Gallery Image 9" />
-        <div class="info-box">Annalium<br>Role(s): Composer</div>
-      </div>
+    <button class="carousel-button prev">&lt;</button>
+    <button class="carousel-button next">&gt;</button>
+    <div class="carousel-dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
     </div>
-    <button id="toggleMoreBtn" style="margin: 30px auto; display: block;">Show More</button>
-    <div id="moreGallery" class="fade-container">
-      <!-- Additional 6 Images -->
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Mark_edited.jpg" alt="Extra Image 1" />
-        <div class="info-box">Mark<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Lachrymose.png.avif" alt="Extra Image 2" />
-        <div class="info-box">Lachrymose<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Experimental%20Philosopher.png.avif" alt="Extra Image 3" />
-        <div class="info-box">Experimental Philosopher<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Beyond%20the%20horizon.png.avif" alt="Extra Image 4" />
-        <div class="info-box">Beyond the Horizon<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Temple.png.avif" alt="Extra Image 5" />
-        <div class="info-box">Temple<br>Role(s): Composer</div>
-      </div>
-      <div class="grid-item" tabindex="0">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Before%20I'm%20Gone%20Cover%20Art.png.avif" alt="Extra Image 6" />
-        <div class="info-box">Before I'm Gone<br>Role(s): Composer</div>
-      </div>
-    </div>
-  </section>
-  <footer>© 2025 Charlie Diggle | Composer</footer>
+  </div>
+
   <script>
-    // Carousel Logic
+    const carouselContent = document.querySelector('.carousel-content');
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
-    let currentSlide = 0;
+    const prevButton = document.querySelector('.carousel-button.prev');
+    const nextButton = document.querySelector('.carousel-button.next');
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => slide.classList.remove('active'));
-      slides[index].classList.add('active');
-      dots.forEach((dot, i) => dot.className = i === index ? 'dot active-dot' : 'dot');
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      const offset = -currentIndex * 100;
+      carouselContent.style.transform = `translateX(${offset}%)`;
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
     }
 
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
+    function showNextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateCarousel();
+    }
+
+    function showPrevSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateCarousel();
     }
 
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
-        currentSlide = index;
-        showSlide(currentSlide);
+        currentIndex = index;
+        updateCarousel();
       });
     });
 
-    setInterval(nextSlide, 6000); // Change slide every 6 seconds
-    showSlide(currentSlide);
+    nextButton.addEventListener('click', showNextSlide);
+    prevButton.addEventListener('click', showPrevSlide);
 
-    // Toggle Info Overlay
-    const gridItems = document.querySelectorAll('.grid-item');
+    // Auto-slide every 5 seconds
+    setInterval(showNextSlide, 5000);
 
-    gridItems.forEach((item) => {
-      item.addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
-    });
-
-    // Show More Logic
-    const toggleMoreBtn = document.getElementById('toggleMoreBtn');
-    const moreGallery = document.getElementById('moreGallery');
-
-    toggleMoreBtn.addEventListener('click', () => {
-      moreGallery.classList.toggle('visible');
-      toggleMoreBtn.textContent = moreGallery.classList.contains('visible') ? 'Show Less' : 'Show More';
-    });
+    // Initialize the carousel
+    updateCarousel();
   </script>
 </body>
 </html>
