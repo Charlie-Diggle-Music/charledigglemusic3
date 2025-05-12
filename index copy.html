@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Carousel</title>
+  <title>Responsive Header and Carousel Fix</title>
   <style>
-    /* General Styling */
+    /* Reset and General Styling */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -13,30 +13,64 @@
       background-color: #f9f9f9;
     }
 
-    .carousel {
+    header {
       position: relative;
-      width: 90%;
-      max-width: 800px;
-      margin: 0 auto;
-      overflow: hidden;
-      /* Maintain aspect ratio for modern browsers */
-      aspect-ratio: 16 / 9;
+      background: url('https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/look%20out%203.png') center top / cover no-repeat;
+      width: 100%;
+      height: 100vh; /* Full viewport height */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
-    /* Fallback for older browsers */
-    .carousel::before {
-      content: "";
-      display: block;
-      padding-top: 56.25%; /* 16:9 ratio (9/16 = 0.5625) */
+    .social-bar {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      z-index: 10;
+    }
+
+    .social-bar a {
+      color: #fff;
+      font-size: 24px;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .social-bar a:hover {
+      transform: scale(1.2);
+    }
+
+    .top-image img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    /* Carousel */
+    .carousel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+      overflow: hidden;
+      aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
+      position: relative;
+      background-color: #000;
+      border-radius: 8px;
     }
 
     .carousel-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       display: flex;
+      width: 100%;
       transition: transform 0.5s ease-in-out;
     }
 
@@ -46,7 +80,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #000;
     }
 
     .slide img,
@@ -60,8 +93,6 @@
     .carousel-dots {
       position: absolute;
       bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
       display: flex;
       justify-content: center;
       gap: 10px;
@@ -79,30 +110,22 @@
     .dot.active {
       background-color: #333;
     }
-
-    /* Navigation Buttons */
-    .carousel-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 18px;
-    }
-
-    .carousel-button.prev {
-      left: 10px;
-    }
-
-    .carousel-button.next {
-      right: 10px;
-    }
   </style>
 </head>
 <body>
+  <header>
+    <div class="social-bar">
+      <a href="https://open.spotify.com/artist/2WVq07g2OwtjJrtWMKddCk?si=6wppj59UQUCi6eFCK1a2aQ" target="_blank" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+      <a href="https://www.instagram.com/charliedigglemusic/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/channel/UC7D4yueffy8w-W7AYIqYAqQ" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.imdb.com/name/nm8530058/?ref_=fn_al_nm_1" target="_blank"><i class="fab fa-imdb"></i></a>
+      <a href="https://www.linkedin.com/in/charlie-diggle-77aa4a196" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <div class="top-image">
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/New%20Logo%20Cropped.png" alt="New Logo">
+    </div>
+  </header>
+
   <div class="carousel">
     <div class="carousel-content">
       <div class="slide">
@@ -115,8 +138,6 @@
         <img src="https://via.placeholder.com/800x450.png?text=Slide+3" alt="Slide 3">
       </div>
     </div>
-    <button class="carousel-button prev">&lt;</button>
-    <button class="carousel-button next">&gt;</button>
     <div class="carousel-dots">
       <div class="dot active"></div>
       <div class="dot"></div>
@@ -128,9 +149,6 @@
     const carouselContent = document.querySelector('.carousel-content');
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
-    const prevButton = document.querySelector('.carousel-button.prev');
-    const nextButton = document.querySelector('.carousel-button.next');
-
     let currentIndex = 0;
 
     function updateCarousel() {
@@ -159,13 +177,10 @@
       });
     });
 
-    nextButton.addEventListener('click', showNextSlide);
-    prevButton.addEventListener('click', showPrevSlide);
-
     // Auto-slide every 5 seconds
     setInterval(showNextSlide, 5000);
 
-    // Initialize the carousel
+    // Initialize carousel
     updateCarousel();
   </script>
 </body>
