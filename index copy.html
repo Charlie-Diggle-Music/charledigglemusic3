@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Header and Carousel Fix</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charlie Diggle | Composer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
-    /* Reset and General Styling */
+    /* General Styles */
     body {
-      font-family: Arial, sans-serif;
+      background-color: #fff;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
+      color: #333;
     }
 
     header {
       position: relative;
+      height: 150vh;
+      overflow: hidden;
       background: url('https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/look%20out%203.png') center top / cover no-repeat;
-      width: 100%;
-      height: 100vh; /* Full viewport height */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
     }
 
     .social-bar {
@@ -32,7 +29,7 @@
       transform: translateX(-50%);
       display: flex;
       gap: 15px;
-      z-index: 10;
+      z-index: 20;
     }
 
     .social-bar a {
@@ -46,24 +43,30 @@
       transform: scale(1.2);
     }
 
+    .top-image {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+    }
+
     .top-image img {
       width: 100%;
-      max-width: 400px;
+      max-width: 1000px;
       height: auto;
-      margin: 0 auto;
     }
 
     /* Carousel */
     .carousel {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: absolute;
+      top: 600px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 90%;
-      max-width: 800px;
-      margin: 20px auto;
+      max-width: 820px;
+      height: 525px;
       overflow: hidden;
-      aspect-ratio: 16 / 9; /* Maintain 16:9 aspect ratio */
-      position: relative;
       background-color: #000;
       border-radius: 8px;
     }
@@ -71,6 +74,7 @@
     .carousel-content {
       display: flex;
       width: 100%;
+      height: 100%;
       transition: transform 0.5s ease-in-out;
     }
 
@@ -89,6 +93,34 @@
       object-fit: contain;
     }
 
+    /* Navigation Arrows */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 24px;
+      z-index: 10;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .carousel-arrow:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .carousel-arrow.prev {
+      left: 10px;
+    }
+
+    .carousel-arrow.next {
+      right: 10px;
+    }
+
     /* Pagination Dots */
     .carousel-dots {
       position: absolute;
@@ -96,6 +128,7 @@
       display: flex;
       justify-content: center;
       gap: 10px;
+      width: 100%;
     }
 
     .dot {
@@ -110,10 +143,103 @@
     .dot.active {
       background-color: #333;
     }
+
+    /* Gallery Grid */
+    .gallery-wrapper {
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .overlay-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .grid-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .grid-item img {
+      width: 100%;
+      aspect-ratio: 1; /* Ensures square images */
+      object-fit: cover;
+    }
+
+    .grid-item .info-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; /* Covers the entire image */
+      background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      font-size: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .grid-item:hover .info-box {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Show More Section */
+    .fade-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.5s ease, max-height 0.5s ease;
+    }
+
+    .fade-container.visible {
+      opacity: 1;
+      max-height: 2000px;
+    }
+
+    .fade-container img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .overlay-grid,
+      .fade-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .overlay-grid,
+      .fade-container {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      .social-bar a {
+        font-size: 18px;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
+    <div class="top-image">
+      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/New%20Logo%20Cropped.png" alt="New Image" />
+    </div>
     <div class="social-bar">
       <a href="https://open.spotify.com/artist/2WVq07g2OwtjJrtWMKddCk?si=6wppj59UQUCi6eFCK1a2aQ" target="_blank" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
       <a href="https://www.instagram.com/charliedigglemusic/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -121,34 +247,106 @@
       <a href="https://www.imdb.com/name/nm8530058/?ref_=fn_al_nm_1" target="_blank"><i class="fab fa-imdb"></i></a>
       <a href="https://www.linkedin.com/in/charlie-diggle-77aa4a196" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
     </div>
-    <div class="top-image">
-      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/New%20Logo%20Cropped.png" alt="New Logo">
+    <div class="carousel" id="carousel">
+      <div class="carousel-content" id="carouselContent">
+        <div class="slide">
+          <iframe id="video1" src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        <div class="slide">
+          <iframe id="video2" src="https://www.youtube.com/embed/-CBoB8Iu0B8?enablejsapi=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        <div class="slide">
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Blunt%20End.png" alt="Slide 3" />
+        </div>
+      </div>
+      <button class="carousel-arrow prev" id="prevArrow">&lt;</button>
+      <button class="carousel-arrow next" id="nextArrow">&gt;</button>
+      <div class="carousel-dots" id="carouselDots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
     </div>
   </header>
-
-  <div class="carousel">
-    <div class="carousel-content">
-      <div class="slide">
-        <iframe src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+  <section class="gallery-wrapper">
+    <h2>Gallery</h2>
+    <div class="overlay-grid">
+      <!-- First 3x3 Grid (Visible by default) -->
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+1" alt="Gallery Image 1" />
+        <div class="info-box">Gallery Image 1 Description</div>
       </div>
-      <div class="slide">
-        <img src="https://via.placeholder.com/800x450.png?text=Slide+2" alt="Slide 2">
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+2" alt="Gallery Image 2" />
+        <div class="info-box">Gallery Image 2 Description</div>
       </div>
-      <div class="slide">
-        <img src="https://via.placeholder.com/800x450.png?text=Slide+3" alt="Slide 3">
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+3" alt="Gallery Image 3" />
+        <div class="info-box">Gallery Image 3 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+4" alt="Gallery Image 4" />
+        <div class="info-box">Gallery Image 4 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+5" alt="Gallery Image 5" />
+        <div class="info-box">Gallery Image 5 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+6" alt="Gallery Image 6" />
+        <div class="info-box">Gallery Image 6 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+7" alt="Gallery Image 7" />
+        <div class="info-box">Gallery Image 7 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+8" alt="Gallery Image 8" />
+        <div class="info-box">Gallery Image 8 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+9" alt="Gallery Image 9" />
+        <div class="info-box">Gallery Image 9 Description</div>
       </div>
     </div>
-    <div class="carousel-dots">
-      <div class="dot active"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
+    <button id="toggleMoreBtn" style="margin: 30px auto; display: block;">Show More</button>
+    <div id="moreGallery" class="fade-container">
+      <!-- Additional 3x2 Grid (Hidden by default) -->
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+10" alt="Extra Image 1" />
+        <div class="info-box">Extra Image 1 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+11" alt="Extra Image 2" />
+        <div class="info-box">Extra Image 2 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+12" alt="Extra Image 3" />
+        <div class="info-box">Extra Image 3 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+13" alt="Extra Image 4" />
+        <div class="info-box">Extra Image 4 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+14" alt="Extra Image 5" />
+        <div class="info-box">Extra Image 5 Description</div>
+      </div>
+      <div class="grid-item" tabindex="0">
+        <img src="https://via.placeholder.com/300x300?text=Gallery+Image+15" alt="Extra Image 6" />
+        <div class="info-box">Extra Image 6 Description</div>
+      </div>
     </div>
-  </div>
-
+  </section>
+  <footer>© 2025 Charlie Diggle | Composer</footer>
   <script>
-    const carouselContent = document.querySelector('.carousel-content');
-    const slides = document.querySelectorAll('.slide');
+    const toggleMoreBtn = document.getElementById('toggleMoreBtn');
+    const moreGallery = document.getElementById('moreGallery');
+    const carouselContent = document.getElementById('carouselContent');
+    const prevArrow = document.getElementById('prevArrow');
+    const nextArrow = document.getElementById('nextArrow');
     const dots = document.querySelectorAll('.dot');
+    const slides = document.querySelectorAll('.slide');
     let currentIndex = 0;
 
     function updateCarousel() {
@@ -157,6 +355,20 @@
 
       dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === currentIndex);
+      });
+
+      slides.forEach((slide, index) => {
+        const iframe = slide.querySelector('iframe');
+        if (iframe) {
+          const iframeSrc = iframe.src;
+          if (index !== currentIndex) {
+            if (iframeSrc.includes("vimeo.com")) {
+              iframe.contentWindow.postMessage('{"method":"pause"}', '*');
+            } else if (iframeSrc.includes("youtube.com")) {
+              iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
+          }
+        }
       });
     }
 
@@ -170,6 +382,9 @@
       updateCarousel();
     }
 
+    nextArrow.addEventListener('click', showNextSlide);
+    prevArrow.addEventListener('click', showPrevSlide);
+
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         currentIndex = index;
@@ -177,10 +392,11 @@
       });
     });
 
-    // Auto-slide every 5 seconds
-    setInterval(showNextSlide, 5000);
+    toggleMoreBtn.addEventListener('click', () => {
+      moreGallery.classList.toggle('visible');
+      toggleMoreBtn.textContent = moreGallery.classList.contains('visible') ? 'Show Less' : 'Show More';
+    });
 
-    // Initialize carousel
     updateCarousel();
   </script>
 </body>
