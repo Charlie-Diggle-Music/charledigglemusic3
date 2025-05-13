@@ -13,7 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <style>
-      /* Desktop / Default Styles (unchanged) */
+      /* Desktop / Default Styles */
       header {
         position: relative;
         width: 100%;
@@ -124,7 +124,7 @@
       .dot.active {
         background-color: #333;
       }
-      /* Gallery Styles remain unchanged */
+      /* Gallery Styles (Desktop) */
       .gallery-wrapper {
         padding: 40px;
         max-width: 1200px;
@@ -231,15 +231,14 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
       }
       
-      /* Mobile-Specific Styles (Only Affecting screens up to 480px) */
+      /* Mobile-Specific Styles */
       @media only screen and (max-width: 480px) {
-        /* Let header wrap content naturally */
         header {
           height: auto;
           padding-bottom: 20px;
           background-size: cover;
         }
-        /* Mobile logo becomes relative and centered */
+        /* Logo: center in normal flow */
         .top-image {
           position: relative;
           left: auto;
@@ -253,46 +252,57 @@
           width: 100%;
           height: auto;
         }
-        /* Mobile carousel is converted to relative and given a fixed height */
+        /* Carousel: use relative positioning and ensure visibility with a min-height */
         .carousel {
           position: relative;
           left: auto;
           transform: none;
           width: 90%;
           max-width: 100%;
-          height: 300px; /* fixed height for mobile */
+          min-height: 300px;
+          height: auto;
           margin: 10px auto;
           text-align: center;
+          display: block;
         }
-        .carousel-content,
+        .carousel-content {
+          display: block;
+          min-height: 300px;
+          height: auto;
+        }
         .slide {
-          height: 100%;
+          display: block;
+          min-height: 300px;
+          height: auto;
         }
       }
       
-      /* Additional Fixes for Messenger's Webview on Mobile */
+      /* Messenger-specific Overrides */
       .messenger-view header {
         height: auto;
         padding-bottom: 20px;
       }
       .messenger-view .carousel {
-        /* For Messenger, apply similar mobile rules */
         position: relative;
         left: auto;
         transform: none;
         width: 90%;
         max-width: 100%;
-        height: 300px;
+        min-height: 300px;
+        height: auto;
         margin: 10px auto;
         text-align: center;
+        display: block;
       }
       .messenger-view .carousel-content,
       .messenger-view .slide {
-        height: 100%;
+        display: block;
+        min-height: 300px;
+        height: auto;
       }
       .messenger-view .gallery-wrapper,
       .messenger-view .overlay-grid {
-        display: block; /* ensure gallery is not hidden */
+        display: block; /* Force display in Messenger webview */
       }
     </style>
   </head>
@@ -300,8 +310,8 @@
     <script>
       // Detect if site is opened in Facebook Messenger's webview; add "messenger-view" class if so.
       if (
-        navigator.userAgent.toLowerCase().indexOf("fbav") > -1 ||
-        navigator.userAgent.toLowerCase().indexOf("fb_iab") > -1
+        navigator.userAgent.toLowerCase().includes("fbav") ||
+        navigator.userAgent.toLowerCase().includes("fb_iab")
       ) {
         document.body.classList.add("messenger-view");
       }
@@ -513,14 +523,13 @@
     </section>
     <footer>© 2025 Charlie Diggle | Composer</footer>
     <script>
-      // Carousel Functionality (unchanged)
+      // Carousel Functionality
       const slides = document.querySelectorAll('.slide');
       const dots = document.querySelectorAll('.dot');
       let currentIndex = 0;
       function updateCarousel() {
         const offset = -currentIndex * 100;
-        document.getElementById('carouselContent').style.transform =
-          `translateX(${offset}%)`;
+        document.getElementById('carouselContent').style.transform = `translateX(${offset}%)`;
         dots.forEach((dot, index) => {
           dot.classList.toggle('active', index === currentIndex);
         });
@@ -530,19 +539,13 @@
             const iframeSrc = iframe.src;
             if (index === currentIndex) {
               if (iframeSrc.includes("youtube.com")) {
-                iframe.contentWindow.postMessage(
-                  '{"event":"command","func":"playVideo","args":""}',
-                  '*'
-                );
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
               } else if (iframeSrc.includes("vimeo.com")) {
                 iframe.contentWindow.postMessage('{"method":"play"}', '*');
               }
             } else {
               if (iframeSrc.includes("youtube.com")) {
-                iframe.contentWindow.postMessage(
-                  '{"event":"command","func":"pauseVideo","args":""}',
-                  '*'
-                );
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
               } else if (iframeSrc.includes("vimeo.com")) {
                 iframe.contentWindow.postMessage('{"method":"pause"}', '*');
               }
@@ -568,7 +571,7 @@
       });
       updateCarousel();
       
-      // Toggle overlay for gallery images (desktop and mobile)
+      // Toggle overlay for gallery images
       document.querySelectorAll('.grid-item').forEach(item => {
         item.addEventListener('click', () => {
           item.classList.toggle('active');
