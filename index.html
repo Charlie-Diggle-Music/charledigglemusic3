@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Charlie Diggle | Composer</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
@@ -252,21 +255,40 @@
         transform: scale(0.98);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
       }
-      /* Mobile-specific styles */
+      /* Mobile-specific styles only */
       @media (max-width: 480px) {
-        /* Reduce header height and adjust carousel positioning to minimize gap */
+        /* Reduce header height and allow header background to end shortly after the carousel */
         header {
-          height: 100vh;
+          position: relative;
+          height: auto;
+          padding-bottom: 20px;
         }
-        .carousel {
-          top: 70%;
-          /* Adjust as needed, lower value means carousel moves up */
-        }
+        /* Position the logo at the top in the normal document flow */
         .top-image {
-          top: 20px;
+          position: static;
+          text-align: center;
+          padding-top: 20px;
+          margin-bottom: 20px;
+        }
+        .top-image img {
+          max-width: 80%;
+          height: auto;
+          margin: auto;
+          display: block;
+        }
+        /* Remove absolute positioning from carousel so it flows after the logo */
+        .carousel {
+          position: static;
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          margin: 0 auto;
+        }
+        .carousel-content, .slide {
+          height: auto;
         }
       }
-      /* Responsive Adjustments */
+      /* Responsive Adjustments for tablets */
       @media (max-width: 768px) {
         .overlay-grid,
         .fade-container {
@@ -718,12 +740,14 @@
         });
       });
       // "Show More" Functionality
-      document.getElementById('toggleMoreBtn').addEventListener('click', () => {
-        const moreGallery = document.getElementById('moreGallery');
-        moreGallery.classList.toggle('visible');
-        document.getElementById('toggleMoreBtn').textContent =
-          moreGallery.classList.contains('visible') ? 'Show Less' : 'Show More';
-      });
+      document
+        .getElementById('toggleMoreBtn')
+        .addEventListener('click', () => {
+          const moreGallery = document.getElementById('moreGallery');
+          moreGallery.classList.toggle('visible');
+          document.getElementById('toggleMoreBtn').textContent =
+            moreGallery.classList.contains('visible') ? 'Show Less' : 'Show More';
+        });
     </script>
   </body>
 </html>
