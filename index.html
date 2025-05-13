@@ -83,14 +83,13 @@
         justify-content: center;
         align-items: center;
       }
-      /* Media inside carousel */
       .slide img,
       .slide iframe {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
-      /* Navigation Arrows */
+      /* Navigation Arrows & Dots */
       .carousel-arrow {
         position: absolute;
         top: 50%;
@@ -114,7 +113,6 @@
       .carousel-arrow.next {
         right: 10px;
       }
-      /* Pagination Dots */
       .carousel-dots {
         position: absolute;
         bottom: 10px;
@@ -134,7 +132,7 @@
       .dot.active {
         background-color: #333;
       }
-      /* Gallery Grid */
+      /* Gallery Grid and related styles */
       .gallery-wrapper {
         padding: 40px;
         max-width: 1200px;
@@ -155,7 +153,6 @@
         aspect-ratio: 1;
         object-fit: cover;
       }
-      /* Gallery Overlay */
       .grid-item .info-box {
         position: absolute;
         top: 0;
@@ -187,7 +184,6 @@
         opacity: 1;
         visibility: visible;
       }
-      /* See More Button */
       .see-more-button {
         display: inline-block;
         margin-top: 10px;
@@ -207,7 +203,6 @@
         transform: scale(1.05);
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
       }
-      /* Show More Section */
       .fade-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -226,7 +221,6 @@
         aspect-ratio: 1;
         object-fit: cover;
       }
-      /* Stylish Show More Button */
       .modern-button {
         margin: 30px auto;
         display: block;
@@ -251,24 +245,25 @@
         transform: scale(0.98);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
       }
-      /* Mobile-specific styles for centering elements using both max-width and max-device-width */
-      @media only screen and (max-device-width: 480px) {
+      
+      /* Mobile-specific styles */
+      /* For portrait orientation on small devices */
+      @media only screen and (max-width: 480px) and (orientation: portrait) {
         header {
           height: auto;
           background-size: cover;
           padding-bottom: 20px;
         }
+        /* Hide social bar in portrait */
         .social-bar {
-          position: static;
-          text-align: center;
-          margin: 10px auto;
+          display: none;
         }
         .top-image {
           position: static;
-          margin: 10px auto;
+          margin: 20px auto 10px;
           text-align: center;
-          left: 50%;
-          transform: translateX(-50%);
+          left: 0;
+          transform: none;
         }
         .top-image img {
           max-width: 80%;
@@ -282,23 +277,59 @@
           height: auto;
           margin: 10px auto;
           text-align: center;
-          left: 50%;
-          transform: translateX(-50%);
+          left: 0;
+          transform: none;
         }
         .carousel-content,
         .slide {
           height: auto;
         }
       }
-      /* Also apply mobile centering for smaller screens in portrait and landscape modes */
+      /* For landscape orientation on small devices */
+      @media only screen and (max-width: 480px) and (orientation: landscape) {
+        header {
+          height: auto;
+          background-size: cover;
+          padding-bottom: 20px;
+        }
+        /* Show social bar in landscape */
+        .social-bar {
+          display: flex;
+        }
+        .top-image {
+          position: static;
+          margin: 10px auto;
+          text-align: center;
+          left: 0;
+          transform: none;
+        }
+        .top-image img {
+          max-width: 80%;
+          display: block;
+          margin: 0 auto;
+        }
+        .carousel {
+          position: static;
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          margin: 10px auto;
+          text-align: center;
+          left: 0;
+          transform: none;
+        }
+        .carousel-content,
+        .slide {
+          height: auto;
+        }
+      }
+      /* Also add centering rules for slightly larger screens (e.g., up to 768px) */
       @media (max-width: 768px) {
         .top-image,
         .carousel {
           margin-left: auto;
           margin-right: auto;
           text-align: center;
-          left: 50%;
-          transform: translateX(-50%);
         }
       }
       /* Extra styles for Messenger's webview */
@@ -307,14 +338,12 @@
         margin-left: auto;
         margin-right: auto;
         text-align: center;
-        left: 50%;
-        transform: translateX(-50%);
       }
     </style>
   </head>
   <body>
     <script>
-      // Detect if the site is opened in Facebook Messenger's webview; if so, add a messenger-view class.
+      // Detect if site is opened in Facebook Messenger's webview; add .messenger-view class if so.
       if (
         navigator.userAgent.toLowerCase().indexOf("fbav") > -1 ||
         navigator.userAgent.toLowerCase().indexOf("fb_iab") > -1
@@ -324,41 +353,84 @@
     </script>
     <header>
       <div class="social-bar">
-        <a href="https://open.spotify.com/artist/2WVq07g2OwtjJrtWMKddCk?si=6wppj59UQUCi6eFCK1a2aQ" target="_blank" aria-label="Spotify">
+        <a
+          href="https://open.spotify.com/artist/2WVq07g2OwtjJrtWMKddCk?si=6wppj59UQUCi6eFCK1a2aQ"
+          target="_blank"
+          aria-label="Spotify"
+        >
           <i class="fab fa-spotify"></i>
         </a>
-        <a href="https://www.instagram.com/charliedigglemusic/" target="_blank" aria-label="Instagram">
+        <a
+          href="https://www.instagram.com/charliedigglemusic/"
+          target="_blank"
+          aria-label="Instagram"
+        >
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="https://www.youtube.com/channel/UC7D4yueffy8w-W7AYIqYAqQ" target="_blank" aria-label="YouTube">
+        <a
+          href="https://www.youtube.com/channel/UC7D4yueffy8w-W7AYIqYAqQ"
+          target="_blank"
+          aria-label="YouTube"
+        >
           <i class="fab fa-youtube"></i>
         </a>
-        <a href="https://www.imdb.com/name/nm8530058/?ref_=fn_al_nm_1" target="_blank">
+        <a
+          href="https://www.imdb.com/name/nm8530058/?ref_=fn_al_nm_1"
+          target="_blank"
+        >
           <i class="fab fa-imdb"></i>
         </a>
-        <a href="https://www.linkedin.com/in/charlie-diggle-77aa4a196" target="_blank" aria-label="LinkedIn">
+        <a
+          href="https://www.linkedin.com/in/charlie-diggle-77aa4a196"
+          target="_blank"
+          aria-label="LinkedIn"
+        >
           <i class="fab fa-linkedin"></i>
         </a>
       </div>
       <div class="top-image">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/New%20Logo%20Cropped.png" alt="New Image" />
+        <img
+          src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/New%20Logo%20Cropped.png"
+          alt="New Image"
+        />
       </div>
       <div class="carousel" id="carousel">
         <div class="carousel-content" id="carouselContent">
           <div class="slide">
-            <iframe id="video1" src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <iframe
+              id="video1"
+              src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1"
+              frameborder="0"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+            ></iframe>
           </div>
           <div class="slide">
-            <iframe id="video2" src="https://www.youtube.com/embed/-CBoB8Iu0B8?enablejsapi=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <iframe
+              id="video2"
+              src="https://www.youtube.com/embed/-CBoB8Iu0B8?enablejsapi=1"
+              frameborder="0"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+            ></iframe>
           </div>
           <div class="slide">
-            <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/foow-card.jpg" alt="Slide 3" />
+            <img
+              src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/foow-card.jpg"
+              alt="Slide 3"
+            />
           </div>
           <div class="slide">
-            <img src="Screenshot 2025-02-18 at 13.41.24.png" alt="Slide 4" />
+            <img
+              src="Screenshot 2025-02-18 at 13.41.24.png"
+              alt="Slide 4"
+            />
           </div>
           <div class="slide">
-            <img src="0f0e1b_8a384dcd87a247dd8bfe62cb230c7a5b~mv2.jpg-2.avif" alt="Slide 5" />
+            <img
+              src="0f0e1b_8a384dcd87a247dd8bfe62cb230c7a5b~mv2.jpg-2.avif"
+              alt="Slide 5"
+            />
           </div>
         </div>
         <button class="carousel-arrow prev" id="prevArrow">&lt;</button>
@@ -377,92 +449,173 @@
       <div class="overlay-grid">
         <!-- Gallery Image 1 with Centered Info -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Blunt%20End.png" alt="Gallery image 1" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Blunt%20End.png"
+            alt="Gallery image 1"
+          />
           <div class="info-box">
             <p>Film - On the Blunt End</p>
             <p>Release - 2023</p>
             <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               See More
             </a>
           </div>
         </div>
         <!-- Gallery Image 2 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Fish%20out%20of%20water%20square.png" alt="Gallery image 2" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Fish%20out%20of%20water%20square.png"
+            alt="Gallery image 2"
+          />
           <div class="info-box">
             <p>Gallery Image 2 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               See More
             </a>
           </div>
         </div>
         <!-- Gallery Image 3 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/annalium8%20imagee_edited.jpg" alt="Gallery image 3" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/annalium8%20imagee_edited.jpg"
+            alt="Gallery image 3"
+          />
           <div class="info-box">
             <p>Gallery Image 3 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               See More
             </a>
           </div>
         </div>
         <!-- Gallery Image 4 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Object.jpg" alt="Gallery image 4" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Object.jpg"
+            alt="Gallery image 4"
+          />
           <div class="info-box">
             <p>Gallery Image 4 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               See More
             </a>
           </div>
         </div>
         <!-- Gallery Image 5 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/TLBROCAM%20.png" alt="Gallery image 5" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/TLBROCAM%20.png"
+            alt="Gallery image 5"
+          />
           <div class="info-box">
             <p>Gallery Image 5 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               See More
             </a>
           </div>
         </div>
         <!-- Gallery Image 6 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Walker%20.png" alt="Gallery image 6" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Walker%20.png"
+            alt="Gallery image 6"
+          />
           <div class="info-box">
             <p>Gallery Image 6 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               See More
             </a>
           </div>
         </div>
         <!-- Gallery Image 7 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/in%20another%20life.png" alt="Gallery image 7" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/in%20another%20life.png"
+            alt="Gallery image 7"
+          />
           <div class="info-box">
             <p>Gallery Image 7 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               See More
             </a>
           </div>
         </div>
         <!-- Gallery Image 8 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Coronation%20Square.png" alt="Gallery image 8" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Coronation%20Square.png"
+            alt="Gallery image 8"
+          />
           <div class="info-box">
             <p>Gallery Image 8 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               See More
             </a>
           </div>
         </div>
         <!-- Gallery Image 9 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Bar%20Watch.png" alt="Gallery image 9" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Bar%20Watch.png"
+            alt="Gallery image 9"
+          />
           <div class="info-box">
             <p>Gallery Image 9 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               See More
             </a>
           </div>
@@ -472,51 +625,111 @@
       <div id="moreGallery" class="fade-container">
         <!-- Additional Images -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Mark_edited.jpg" alt="Extra Image 1" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Mark_edited.jpg"
+            alt="Extra Image 1"
+          />
           <div class="info-box">
             <p>Extra Image 1 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()"
-              target="_blank" rel="noopener noreferrer">See More</a>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              See More
+            </a>
           </div>
         </div>
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Lachrymose.png.avif" alt="Extra Image 2" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Lachrymose.png.avif"
+            alt="Extra Image 2"
+          />
           <div class="info-box">
             <p>Extra Image 2 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()"
-              target="_blank" rel="noopener noreferrer">See More</a>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              See More
+            </a>
           </div>
         </div>
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Before%20I'm%20Gone%20Cover%20Art.png.avif" alt="Extra Image 3" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Before%20I'm%20Gone%20Cover%20Art.png.avif"
+            alt="Extra Image 3"
+          />
           <div class="info-box">
             <p>Extra Image 3 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()"
-              target="_blank" rel="noopener noreferrer">See More</a>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              See More
+            </a>
           </div>
         </div>
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Experimental%20Philosopher.png.avif" alt="Extra Image 4" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Experimental%20Philosopher.png.avif"
+            alt="Extra Image 4"
+          />
           <div class="info-box">
             <p>Extra Image 4 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()"
-              target="_blank" rel="noopener noreferrer">See More</a>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              See More
+            </a>
           </div>
         </div>
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Beyond%20the%20horizon.png.avif" alt="Extra Image 5" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Beyond%20the%20horizon.png.avif"
+            alt="Extra Image 5"
+          />
           <div class="info-box">
             <p>Extra Image 5 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()"
-              target="_blank" rel="noopener noreferrer">See More</a>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              See More
+            </a>
           </div>
         </div>
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Temple.png.avif" alt="Extra Image 6" />
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Temple.png.avif"
+            alt="Extra Image 6"
+          />
           <div class="info-box">
             <p>Extra Image 6 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()"
-              target="_blank" rel="noopener noreferrer">See More</a>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              See More
+            </a>
           </div>
         </div>
       </div>
@@ -529,24 +742,31 @@
       let currentIndex = 0;
       function updateCarousel() {
         const offset = -currentIndex * 100;
-        document.getElementById('carouselContent').style.transform = `translateX(${offset}%)`;
+        document.getElementById('carouselContent').style.transform =
+          `translateX(${offset}%)`;
         dots.forEach((dot, index) =>
           dot.classList.toggle('active', index === currentIndex)
         );
-        // Pause or play videos based on the active slide
+        // Manage autoplay/pause for iframes.
         slides.forEach((slide, index) => {
           const iframe = slide.querySelector('iframe');
           if (iframe) {
             const iframeSrc = iframe.src;
             if (index === currentIndex) {
               if (iframeSrc.includes("youtube.com")) {
-                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                iframe.contentWindow.postMessage(
+                  '{"event":"command","func":"playVideo","args":""}',
+                  '*'
+                );
               } else if (iframeSrc.includes("vimeo.com")) {
                 iframe.contentWindow.postMessage('{"method":"play"}', '*');
               }
             } else {
               if (iframeSrc.includes("youtube.com")) {
-                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                iframe.contentWindow.postMessage(
+                  '{"event":"command","func":"pauseVideo","args":""}',
+                  '*'
+                );
               } else if (iframeSrc.includes("vimeo.com")) {
                 iframe.contentWindow.postMessage('{"method":"pause"}', '*');
               }
@@ -571,13 +791,15 @@
         });
       });
       updateCarousel();
-      // Toggle overlay for gallery images
+      
+      // Toggle overlay for gallery images.
       document.querySelectorAll('.grid-item').forEach(item => {
         item.addEventListener('click', () => {
           item.classList.toggle('active');
         });
       });
-      // "Show More" functionality for gallery
+      
+      // "Show More" functionality for gallery.
       document.getElementById('toggleMoreBtn').addEventListener('click', () => {
         const moreGallery = document.getElementById('moreGallery');
         moreGallery.classList.toggle('visible');
