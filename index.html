@@ -1,454 +1,929 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Charlie Diggle | Composer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <style>
-    /* General Styles */
-    body {
-      background-color: #fff;
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      color: #333;
-    }
-
-    header {
-      position: relative;
-      height: 150vh;
-      overflow: hidden;
-      background: url('https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/look%20out%203.png') center top / cover no-repeat;
-    }
-
-    .social-bar {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 15px;
-      z-index: 20;
-    }
-
-    .social-bar a {
-      color: #fff;
-      font-size: 24px;
-      text-decoration: none;
-      transition: transform 0.3s;
-    }
-
-    .social-bar a:hover {
-      transform: scale(1.2);
-    }
-
-    .top-image {
-      position: absolute;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 30;
-    }
-
-    .top-image img {
-      width: 100%;
-      max-width: 1000px;
-      height: auto;
-    }
-
-    /* Carousel */
-    .carousel {
-      position: absolute;
-      top: 600px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 805px;
-      height: 518px;
-      overflow: hidden;
-      background-color: #000;
-      border-radius: 0px;
-    }
-
-    .carousel-content {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .slide {
-      min-width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .slide img,
-    .slide iframe {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    /* Navigation Arrows */
-    .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 24px;
-      z-index: 10;
-      border-radius: 4px;
-      transition: background-color 0.3s;
-    }
-
-    .carousel-arrow:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-
-    .carousel-arrow.prev {
-      left: 10px;
-    }
-
-    .carousel-arrow.next {
-      right: 10px;
-    }
-
-    /* Pagination Dots */
-    .carousel-dots {
-      position: absolute;
-      bottom: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-    }
-
-    .dot {
-      width: 12px;
-      height: 12px;
-      background-color: #ccc;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .dot.active {
-      background-color: #333;
-    }
-
-    /* Gallery Grid */
-    .gallery-wrapper {
-      padding: 40px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .overlay-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .grid-item {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .grid-item img {
-      width: 100%;
-      aspect-ratio: 1; /* Ensures square images */
-      object-fit: cover;
-    }
-
-    /* Centering the overlay text */
-    .grid-item .info-box {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-      font-size: 16px;
-      width: 90%; /* Ensures proper alignment */
-      height: auto;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      border-radius: 10px;
-    }
-
-    .grid-item.active .info-box {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Show More Section */
-    .fade-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: opacity 0.5s ease, max-height 0.5s ease;
-    }
-
-    .fade-container.visible {
-      opacity: 1;
-      max-height: 2000px; /* Large enough to fit content */
-    }
-
-    .fade-container img {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-    }
-
-    /* Stylish Show More Button */
-    .modern-button {
-      margin: 30px auto;
-      display: block;
-      padding: 12px 24px;
-      font-size: 16px;
-      font-weight: bold;
-      text-align: center;
-      color: #fff;
-      background: linear-gradient(45deg, #6a11cb, #2575fc); /* Gradient */
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .modern-button:hover {
-      background: linear-gradient(45deg, #2575fc, #6a11cb); /* Reverse gradient on hover */
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .modern-button:active {
-      transform: scale(0.98);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .overlay-grid,
-      .fade-container {
-        grid-template-columns: repeat(2, 1fr);
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Charlie Diggle | Composer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* General Styles */
+      body {
+        background-color: #fff;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        color: #333;
       }
-    }
-
-    @media (max-width: 480px) {
-      .overlay-grid,
-      .fade-container {
-        grid-template-columns: repeat(1, 1fr);
+      header {
+        position: relative;
+        height: 150vh;
+        overflow: hidden;
+        background: url('https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/look%20out%203.png')
+          center top / cover no-repeat;
       }
-
+      .social-bar {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 15px;
+        z-index: 20;
+      }
       .social-bar a {
-        font-size: 18px;
+        color: #fff;
+        font-size: 24px;
+        text-decoration: none;
+        transition: transform 0.3s;
       }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="top-image">
-      <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/New%20Logo%20Cropped.png" alt="New Image" />
-    </div>
-    <div class="social-bar">
-      <a href="https://open.spotify.com/artist/2WVq07g2OwtjJrtWMKddCk?si=6wppj59UQUCi6eFCK1a2aQ" target="_blank" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
-      <a href="https://www.instagram.com/charliedigglemusic/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.youtube.com/channel/UC7D4yueffy8w-W7AYIqYAqQ" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.imdb.com/name/nm8530058/?ref_=fn_al_nm_1" target="_blank"><i class="fab fa-imdb"></i></a>
-      <a href="https://www.linkedin.com/in/charlie-diggle-77aa4a196" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-    </div>
-    <div class="carousel" id="carousel">
-      <div class="carousel-content" id="carouselContent">
-        <div class="slide">
-          <iframe id="video1" src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      .social-bar a:hover {
+        transform: scale(1.2);
+      }
+      .top-image {
+        position: absolute;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 30;
+      }
+      .top-image img {
+        width: 100%;
+        max-width: 1000px;
+        height: auto;
+      }
+      /* Carousel */
+      .carousel {
+        position: absolute;
+        top: 600px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 805px;
+        height: 518px;
+        overflow: hidden;
+        background-color: #000;
+        border-radius: 0;
+      }
+      .carousel-content {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s ease-in-out;
+      }
+      .slide {
+        min-width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      /* Use object-fit: cover so media stretches to cover the slide entirely */
+      .slide img,
+      .slide iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      /* Navigation Arrows */
+      .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 24px;
+        z-index: 10;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+      .carousel-arrow:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+      .carousel-arrow.prev {
+        left: 10px;
+      }
+      .carousel-arrow.next {
+        right: 10px;
+      }
+      /* Pagination Dots */
+      .carousel-dots {
+        position: absolute;
+        bottom: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        background-color: #ccc;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .dot.active {
+        background-color: #333;
+      }
+      /* Gallery Grid */
+      .gallery-wrapper {
+        padding: 40px;
+        max-width: 1200px;
+        margin: auto;
+      }
+      .overlay-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .grid-item {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .grid-item img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+      }
+      /* Overlay covers the full image and centers its content */
+      .grid-item .info-box {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        font-size: 16px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        box-sizing: border-box;
+        /* Ensure long words break nicely */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      /* Remove default paragraph margins for better centering */
+      .info-box p {
+        margin: 0;
+        padding: 2px 0;
+        text-align: center;
+      }
+      .grid-item.active .info-box {
+        opacity: 1;
+        visibility: visible;
+      }
+      /* "See More" Link Styling */
+      .see-more-button {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(45deg, #6a11cb, #2575fc);
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .see-more-button:hover {
+        background: linear-gradient(45deg, #2575fc, #6a11cb);
+        transform: scale(1.05);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      /* Show More Section */
+      .fade-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 0.5s ease, max-height 0.5s ease;
+      }
+      .fade-container.visible {
+        opacity: 1;
+        max-height: 2000px;
+      }
+      .fade-container img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+      }
+      /* Stylish Show More Button */
+      .modern-button {
+        margin: 30px auto;
+        display: block;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        color: #fff;
+        background: linear-gradient(45deg, #6a11cb, #2575fc);
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      .modern-button:hover {
+        background: linear-gradient(45deg, #2575fc, #6a11cb);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+      .modern-button:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      }
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .overlay-grid,
+        .fade-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .overlay-grid,
+        .fade-container {
+          grid-template-columns: repeat(1, 1fr);
+        }
+        .social-bar a {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="top-image">
+        <img
+          src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/New%20Logo%20Cropped.png"
+          alt="New Image"
+        />
+      </div>
+      <div class="social-bar">
+        <a
+          href="https://open.spotify.com/artist/2WVq07g2OwtjJrtWMKddCk?si=6wppj59UQUCi6eFCK1a2aQ"
+          target="_blank"
+          aria-label="Spotify"
+          ><i class="fab fa-spotify"></i
+        ></a>
+        <a
+          href="https://www.instagram.com/charliedigglemusic/"
+          target="_blank"
+          aria-label="Instagram"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="https://www.youtube.com/channel/UC7D4yueffy8w-W7AYIqYAqQ"
+          target="_blank"
+          aria-label="YouTube"
+          ><i class="fab fa-youtube"></i
+        ></a>
+        <a
+          href="https://www.imdb.com/name/nm8530058/?ref_=fn_al_nm_1"
+          target="_blank"
+          ><i class="fab fa-imdb"></i
+        ></a>
+        <a
+          href="https://www.linkedin.com/in/charlie-diggle-77aa4a196"
+          target="_blank"
+          aria-label="LinkedIn"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+      </div>
+      <div class="carousel" id="carousel">
+        <div class="carousel-content" id="carouselContent">
+          <div class="slide">
+            <iframe
+              id="video1"
+              src="https://player.vimeo.com/video/924175199?h=de6e39570d&autoplay=1&muted=1"
+              frameborder="0"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="slide">
+            <iframe
+              id="video2"
+              src="https://www.youtube.com/embed/-CBoB8Iu0B8?enablejsapi=1"
+              frameborder="0"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="slide">
+            <img
+              src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/foow-card.jpg"
+              alt="Slide 3"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="Screenshot 2025-02-18 at 13.41.24.png"
+              alt="Slide 4"
+            />
+          </div>
+          <div class="slide">
+            <img
+              src="0f0e1b_8a384dcd87a247dd8bfe62cb230c7a5b~mv2.jpg-2.avif"
+              alt="Slide 5"
+            />
+          </div>
         </div>
-        <div class="slide">
-          <iframe id="video2" src="https://www.youtube.com/embed/-CBoB8Iu0B8?enablejsapi=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-        </div>
-        <div class="slide">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/foow-card.jpg" alt="Slide 3" />
-        </div>
-        <div class="slide">
-          <img src="Screenshot 2025-02-18 at 13.41.24.png" alt="Slide 4" />
-        </div>
-        <div class="slide">
-          <img src="0f0e1b_8a384dcd87a247dd8bfe62cb230c7a5b~mv2.jpg-2.avif" alt="Slide 5" />
+        <button class="carousel-arrow prev" id="prevArrow">&lt;</button>
+        <button class="carousel-arrow next" id="nextArrow">&gt;</button>
+        <div class="carousel-dots" id="carouselDots">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
         </div>
       </div>
-      <button class="carousel-arrow prev" id="prevArrow">&lt;</button>
-      <button class="carousel-arrow next" id="nextArrow">&gt;</button>
-      <div class="carousel-dots" id="carouselDots">
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+    </header>
+    <section class="gallery-wrapper">
+      <h2>Gallery</h2>
+      <div class="overlay-grid">
+        <!-- Gallery Image 1 with Centered Info -->
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Blunt%20End.png"
+            alt="Gallery image 1"
+          />
+          <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <!-- Gallery Image 2 -->
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Fish%20out%20of%20water%20square.png"
+            alt="Gallery image 2"
+          />
+           <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <!-- Gallery Image 3 -->
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/annalium8%20imagee_edited.jpg"
+            alt="Gallery image 3"
+          />
+          <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <!-- Gallery Image 4 -->
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Object.jpg"
+            alt="Gallery image 4"
+          />
+           <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <!-- Gallery Image 5 -->
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/TLBROCAM%20.png"
+            alt="Gallery image 5"
+          />
+          <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <!-- Gallery Image 6 -->
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Walker%20.png"
+            alt="Gallery image 6"
+          />
+         <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <!-- Gallery Image 7 -->
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/in%20another%20life.png"
+            alt="Gallery image 7"
+          />
+          <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <!-- Gallery Image 8 -->
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Coronation%20Square.png"
+            alt="Gallery image 8"
+          />
+          <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <!-- Gallery Image 9 -->
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Bar%20Watch.png"
+            alt="Gallery image 9"
+          />
+         <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
       </div>
-    </div>
-  </header>
-  <section class="gallery-wrapper">
-    <h2>Gallery</h2>
-    <div class="overlay-grid">
-      <!-- Main Gallery Images -->
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Blunt%20End.png" alt="Gallery image 1" />
-        <div class="info-box">Gallery Image 1 Description</div>
+      <button id="toggleMoreBtn" class="modern-button">Show More</button>
+      <div id="moreGallery" class="fade-container">
+        <!-- Additional Images -->
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Mark_edited.jpg"
+            alt="Extra Image 1"
+          />
+           <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Lachrymose.png.avif"
+            alt="Extra Image 2"
+          />
+          <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Before%20I'm%20Gone%20Cover%20Art.png.avif"
+            alt="Extra Image 3"
+          />
+          <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Experimental%20Philosopher.png.avif"
+            alt="Extra Image 4"
+          />
+         <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Beyond%20the%20horizon.png.avif"
+            alt="Extra Image 5"
+          />
+          <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
+        <div class="grid-item">
+          <img
+            src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Temple.png.avif"
+            alt="Extra Image 6"
+          />
+          <div class="info-box">
+            <p>Film - On the Blunt End</p>
+            <p>
+            <p>
+            <p>
+            <p>Release - 2023</p>
+            <p>
+            <p>
+            <p>
+            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <p>
+            <a
+              href="https://example.com"
+              class="see-more-button"
+              onclick="event.stopPropagation()"
+              target="_blank"
+              rel="noopener noreferrer"
+              >See More</a
+            >
+          </div>
+        </div>
       </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Fish%20out%20of%20water%20square.png" alt="Gallery image 2" />
-        <div class="info-box">Gallery Image 2 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/annalium8%20imagee_edited.jpg" alt="Gallery image 3" />
-        <div class="info-box">Gallery Image 3 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Object.jpg" alt="Gallery image 4" />
-        <div class="info-box">Gallery Image 4 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/TLBROCAM%20.png" alt="Gallery image 5" />
-        <div class="info-box">Gallery Image 5 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Walker%20.png" alt="Gallery image 6" />
-        <div class="info-box">Gallery Image 6 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/in%20another%20life.png" alt="Gallery image 7" />
-        <div class="info-box">Gallery Image 7 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Coronation%20Square.png" alt="Gallery image 8" />
-        <div class="info-box">Gallery Image 8 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Bar%20Watch.png" alt="Gallery image 9" />
-        <div class="info-box">Gallery Image 9 Description</div>
-      </div>
-    </div>
-    <button id="toggleMoreBtn" class="modern-button">Show More</button>
-    <div id="moreGallery" class="fade-container">
-      <!-- Additional Images -->
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Mark_edited.jpg" alt="Extra Image 1" />
-        <div class="info-box">Extra Image 1 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Lachrymose.png.avif" alt="Extra Image 2" />
-        <div class="info-box">Extra Image 2 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Before%20I'm%20Gone%20Cover%20Art.png.avif" alt="Extra Image 3" />
-        <div class="info-box">Extra Image 3 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Experimental%20Philosopher.png.avif" alt="Extra Image 4" />
-        <div class="info-box">Extra Image 4 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Beyond%20the%20horizon.png.avif" alt="Extra Image 5" />
-        <div class="info-box">Extra Image 5 Description</div>
-      </div>
-      <div class="grid-item">
-        <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Temple.png.avif" alt="Extra Image 6" />
-        <div class="info-box">Extra Image 6 Description</div>
-      </div>
-    </div>
-  </section>
-  <footer>© 2025 Charlie Diggle | Composer</footer>
-  <script>
-    // Carousel Functionality
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let currentIndex = 0;
-
-    function updateCarousel() {
-      const offset = -currentIndex * 100;
-      document.getElementById('carouselContent').style.transform = `translateX(${offset}%)`;
-
-      dots.forEach((dot, index) => dot.classList.toggle('active', index === currentIndex));
-
-      // Pause videos if not visible and autoplay the active one
-      slides.forEach((slide, index) => {
-        const iframe = slide.querySelector('iframe');
-        if (iframe) {
-          const iframeSrc = iframe.src;
-          if (index === currentIndex) {
-            // Autoplay the video if it's the active slide
-            if (iframeSrc.includes("youtube.com")) {
-              iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            } else if (iframeSrc.includes("vimeo.com")) {
-              iframe.contentWindow.postMessage('{"method":"play"}', '*');
-            }
-          } else {
-            // Pause the video if it's not the active slide
-            if (iframeSrc.includes("youtube.com")) {
-              iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-            } else if (iframeSrc.includes("vimeo.com")) {
-              iframe.contentWindow.postMessage('{"method":"pause"}', '*');
+    </section>
+    <footer>© 2025 Charlie Diggle | Composer</footer>
+    <script>
+      // Carousel Functionality
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
+      let currentIndex = 0;
+      function updateCarousel() {
+        const offset = -currentIndex * 100;
+        document.getElementById('carouselContent').style.transform =
+          `translateX(${offset}%)`;
+        dots.forEach((dot, index) =>
+          dot.classList.toggle('active', index === currentIndex)
+        );
+        // Pause videos if not visible and autoplay the active one
+        slides.forEach((slide, index) => {
+          const iframe = slide.querySelector('iframe');
+          if (iframe) {
+            const iframeSrc = iframe.src;
+            if (index === currentIndex) {
+              // Autoplay the video if it's the active slide.
+              if (iframeSrc.includes("youtube.com")) {
+                iframe.contentWindow.postMessage(
+                  '{"event":"command","func":"playVideo","args":""}',
+                  '*'
+                );
+              } else if (iframeSrc.includes("vimeo.com")) {
+                iframe.contentWindow.postMessage('{"method":"play"}', '*');
+              }
+            } else {
+              // Pause the video if it's not the active slide.
+              if (iframeSrc.includes("youtube.com")) {
+                iframe.contentWindow.postMessage(
+                  '{"event":"command","func":"pauseVideo","args":""}',
+                  '*'
+                );
+              } else if (iframeSrc.includes("vimeo.com")) {
+                iframe.contentWindow.postMessage('{"method":"pause"}', '*');
+              }
             }
           }
-        }
-      });
-    }
-
-    function showNextSlide() {
-      currentIndex = (currentIndex + 1) % slides.length;
-      updateCarousel();
-    }
-
-    function showPrevSlide() {
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-      updateCarousel();
-    }
-
-    document.getElementById('nextArrow').addEventListener('click', showNextSlide);
-    document.getElementById('prevArrow').addEventListener('click', showPrevSlide);
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        currentIndex = index;
+        });
+      }
+      function showNextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
         updateCarousel();
+      }
+      function showPrevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateCarousel();
+      }
+      document
+        .getElementById('nextArrow')
+        .addEventListener('click', showNextSlide);
+      document
+        .getElementById('prevArrow')
+        .addEventListener('click', showPrevSlide);
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          currentIndex = index;
+          updateCarousel();
+        });
       });
-    });
-
-    updateCarousel();
-
-    // Toggle overlay functionality
-    document.querySelectorAll('.grid-item').forEach(item => {
-      item.addEventListener('click', () => {
-        item.classList.toggle('active');
+      updateCarousel();
+      // Toggle overlay functionality
+      document.querySelectorAll('.grid-item').forEach(item => {
+        item.addEventListener('click', () => {
+          item.classList.toggle('active');
+        });
       });
-    });
-
-    // "Show More" Functionality
-    document.getElementById('toggleMoreBtn').addEventListener('click', () => {
-      const moreGallery = document.getElementById('moreGallery');
-      moreGallery.classList.toggle('visible');
-      document.getElementById('toggleMoreBtn').textContent = moreGallery.classList.contains('visible') ? 'Show Less' : 'Show More';
-    });
-  </script>
-</body>
+      // "Show More" Functionality
+      document
+        .getElementById('toggleMoreBtn')
+        .addEventListener('click', () => {
+          const moreGallery = document.getElementById('moreGallery');
+          moreGallery.classList.toggle('visible');
+          document.getElementById('toggleMoreBtn').textContent =
+            moreGallery.classList.contains('visible') ? 'Show Less' : 'Show More';
+        });
+    </script>
+  </body>
 </html>
