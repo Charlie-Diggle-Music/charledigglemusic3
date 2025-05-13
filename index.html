@@ -22,6 +22,8 @@
       }
       header {
         position: relative;
+        width: 100%;
+        /* Use 150vh for larger screens */
         height: 150vh;
         overflow: hidden;
         background: url('https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/look%20out%203.png')
@@ -68,7 +70,6 @@
         height: 518px;
         overflow: hidden;
         background-color: #000;
-        border-radius: 0;
       }
       .carousel-content {
         display: flex;
@@ -132,7 +133,7 @@
       .dot.active {
         background-color: #333;
       }
-      /* Gallery Grid and related styles */
+      /* Gallery Grid and Related Styles */
       .gallery-wrapper {
         padding: 40px;
         max-width: 1200px;
@@ -246,9 +247,9 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
       }
       
-      /* Mobile-specific styles (only affecting mobile) */
+      /* Mobile-specific Styles (Only Affecting Mobile) */
       @media only screen and (max-width: 480px) {
-        /* Force header to span full screen width */
+        /* Remove header absolute centering so it takes full width */
         header {
           width: 100vw;
           left: 0;
@@ -257,7 +258,7 @@
           background-size: cover;
           padding-bottom: 20px;
         }
-        /* For portrait, hide the social bar (if desired) */
+        /* Social bar: optionally hide in portrait */
         @media (orientation: portrait) {
           .social-bar {
             display: none;
@@ -268,13 +269,18 @@
             display: flex;
           }
         }
-        /* Remove absolute positioning and centering transforms for logo and carousel */
+        /* Remove absolute positioning from logo container */
         .top-image {
           position: static;
           margin: 20px auto 10px;
           text-align: center;
-          /* Remove left and transform rules */
         }
+        .top-image img {
+          max-width: 80%;
+          display: block;
+          margin: 0 auto;
+        }
+        /* Remove absolute positioning from carousel container */
         .carousel {
           position: static;
           width: 100%;
@@ -282,11 +288,13 @@
           height: auto;
           margin: 10px auto;
           text-align: center;
-          /* Remove left and transform rules */
+        }
+        .carousel-content, .slide {
+          height: auto; /* Let inner media size naturally */
         }
       }
       
-      /* Extra centering rules for slightly larger screens (up to 768px) */
+      /* Extra rules for slightly larger screens (up to 768px) */
       @media (max-width: 768px) {
         .top-image,
         .carousel {
@@ -296,7 +304,7 @@
         }
       }
       
-      /* Extra styles for Messenger's webview */
+      /* Additional rules for Facebook Messenger WebView */
       .messenger-view .top-image,
       .messenger-view .carousel {
         margin-left: auto;
@@ -375,7 +383,9 @@
             <p>Film - On the Blunt End</p>
             <p>Release - 2023</p>
             <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">See More</a>
+            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+              See More
+            </a>
           </div>
         </div>
         <!-- Gallery Image 2 -->
@@ -383,7 +393,9 @@
           <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Fish%20out%20of%20water%20square.png" alt="Gallery image 2" />
           <div class="info-box">
             <p>Gallery Image 2 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">See More</a>
+            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+              See More
+            </a>
           </div>
         </div>
         <!-- Gallery Image 3 -->
@@ -391,7 +403,9 @@
           <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/annalium8%20imagee_edited.jpg" alt="Gallery image 3" />
           <div class="info-box">
             <p>Gallery Image 3 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">See More</a>
+            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+              See More
+            </a>
           </div>
         </div>
         <!-- Gallery Image 4 -->
@@ -399,7 +413,9 @@
           <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Object.jpg" alt="Gallery image 4" />
           <div class="info-box">
             <p>Gallery Image 4 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">See More</a>
+            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+              See More
+            </a>
           </div>
         </div>
         <!-- Gallery Image 5 -->
@@ -407,7 +423,9 @@
           <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/TLBROCAM%20.png" alt="Gallery image 5" />
           <div class="info-box">
             <p>Gallery Image 5 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">See More</a>
+            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+              See More
+            </a>
           </div>
         </div>
         <!-- Gallery Image 6 -->
@@ -415,7 +433,9 @@
           <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Walker%20.png" alt="Gallery image 6" />
           <div class="info-box">
             <p>Gallery Image 6 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">See More</a>
+            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+              See More
+            </a>
           </div>
         </div>
         <!-- Gallery Image 7 -->
@@ -423,7 +443,9 @@
           <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/in%20another%20life.png" alt="Gallery image 7" />
           <div class="info-box">
             <p>Gallery Image 7 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">See More</a>
+            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+              See More
+            </a>
           </div>
         </div>
         <!-- Gallery Image 8 -->
@@ -431,7 +453,9 @@
           <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Coronation%20Square.png" alt="Gallery image 8" />
           <div class="info-box">
             <p>Gallery Image 8 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">See More</a>
+            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+              See More
+            </a>
           </div>
         </div>
         <!-- Gallery Image 9 -->
@@ -439,7 +463,9 @@
           <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Bar%20Watch.png" alt="Gallery image 9" />
           <div class="info-box">
             <p>Gallery Image 9 Description</p>
-            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">See More</a>
+            <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
+              See More
+            </a>
           </div>
         </div>
       </div>
@@ -510,8 +536,7 @@
       let currentIndex = 0;
       function updateCarousel() {
         const offset = -currentIndex * 100;
-        document.getElementById('carouselContent').style.transform =
-          `translateX(${offset}%)`;
+        document.getElementById('carouselContent').style.transform = `translateX(${offset}%)`;
         dots.forEach((dot, index) =>
           dot.classList.toggle('active', index === currentIndex)
         );
@@ -522,19 +547,13 @@
             const iframeSrc = iframe.src;
             if (index === currentIndex) {
               if (iframeSrc.includes("youtube.com")) {
-                iframe.contentWindow.postMessage(
-                  '{"event":"command","func":"playVideo","args":""}',
-                  '*'
-                );
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
               } else if (iframeSrc.includes("vimeo.com")) {
                 iframe.contentWindow.postMessage('{"method":"play"}', '*');
               }
             } else {
               if (iframeSrc.includes("youtube.com")) {
-                iframe.contentWindow.postMessage(
-                  '{"event":"command","func":"pauseVideo","args":""}',
-                  '*'
-                );
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
               } else if (iframeSrc.includes("vimeo.com")) {
                 iframe.contentWindow.postMessage('{"method":"pause"}', '*');
               }
@@ -560,7 +579,7 @@
       });
       updateCarousel();
       
-      // Toggle overlay for gallery
+      // Toggle overlay for gallery images.
       document.querySelectorAll('.grid-item').forEach(item => {
         item.addEventListener('click', () => {
           item.classList.toggle('active');
