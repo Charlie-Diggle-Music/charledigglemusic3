@@ -4,8 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Charlie Diggle | Composer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
       /* General Styles */
       body {
@@ -172,7 +178,6 @@
         word-wrap: break-word;
         overflow-wrap: break-word;
       }
-      /* Remove default paragraph margins for better centering */
       .info-box p {
         margin: 0;
         padding: 2px 0;
@@ -246,24 +251,24 @@
         transform: scale(0.98);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
       }
-      /* Mobile-specific styles only */
+      /* Mobile-specific styles */
       @media (max-width: 480px) {
-        /* Reduce header height and scale down the background image */
         header {
           height: auto;
           background-size: cover;
           padding-bottom: 20px;
         }
-        /* Place social bar and logo in the normal document flow */
+        /* Place social bar at the top in flow with center alignment */
         .social-bar {
           position: static;
           text-align: center;
           margin-top: 10px;
         }
+        /* Ensure logo is centered horizontally in the flow */
         .top-image {
           position: static;
-          text-align: center;
           margin: 10px auto;
+          text-align: center;
         }
         .top-image img {
           max-width: 80%;
@@ -283,25 +288,22 @@
           height: auto;
         }
       }
-      /* Responsive Adjustments for tablets */
-      @media (max-width: 768px) {
-        .overlay-grid,
-        .fade-container {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 480px) {
-        .overlay-grid,
-        .fade-container {
-          grid-template-columns: repeat(1, 1fr);
-        }
-        .social-bar a {
-          font-size: 18px;
-        }
+      /* Extra styles for Messenger's WebView using user agent detection */
+      .messenger-view .top-image,
+      .messenger-view .carousel {
+        margin-left: auto;
+        margin-right: auto;
       }
     </style>
   </head>
   <body>
+    <!-- Detect Facebook Messenger's webview and add a class -->
+    <script>
+      if (navigator.userAgent.toLowerCase().indexOf("fbav") > -1 ||
+          navigator.userAgent.toLowerCase().indexOf("fb_iab") > -1) {
+        document.body.classList.add("messenger-view");
+      }
+    </script>
     <header>
       <div class="social-bar">
         <a href="https://open.spotify.com/artist/2WVq07g2OwtjJrtWMKddCk?si=6wppj59UQUCi6eFCK1a2aQ" target="_blank" aria-label="Spotify">
