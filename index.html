@@ -2,10 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Charlie Diggle | Composer</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
@@ -178,7 +175,6 @@
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
         box-sizing: border-box;
-        /* Ensure long words break nicely */
         word-wrap: break-word;
         overflow-wrap: break-word;
       }
@@ -255,6 +251,20 @@
       .modern-button:active {
         transform: scale(0.98);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      }
+      /* Mobile-specific styles */
+      @media (max-width: 480px) {
+        /* Reduce header height and adjust carousel positioning to minimize gap */
+        header {
+          height: 100vh;
+        }
+        .carousel {
+          top: 70%;
+          /* Adjust as needed, lower value means carousel moves up */
+        }
+        .top-image {
+          top: 20px;
+        }
       }
       /* Responsive Adjustments */
       @media (max-width: 768px) {
@@ -374,20 +384,8 @@
           />
           <div class="info-box">
             <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
             <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
             <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -404,22 +402,8 @@
             src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Fish%20out%20of%20water%20square.png"
             alt="Gallery image 2"
           />
-           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+          <div class="info-box">
+            <p>Gallery Image 2 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -437,21 +421,7 @@
             alt="Gallery image 3"
           />
           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+            <p>Gallery Image 3 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -468,22 +438,8 @@
             src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Object.jpg"
             alt="Gallery image 4"
           />
-           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+          <div class="info-box">
+            <p>Gallery Image 4 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -501,21 +457,7 @@
             alt="Gallery image 5"
           />
           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+            <p>Gallery Image 5 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -532,22 +474,8 @@
             src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/The%20Walker%20.png"
             alt="Gallery image 6"
           />
-         <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+          <div class="info-box">
+            <p>Gallery Image 6 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -565,21 +493,7 @@
             alt="Gallery image 7"
           />
           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+            <p>Gallery Image 7 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -597,21 +511,7 @@
             alt="Gallery image 8"
           />
           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+            <p>Gallery Image 8 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -628,22 +528,8 @@
             src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Bar%20Watch.png"
             alt="Gallery image 9"
           />
-         <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+          <div class="info-box">
+            <p>Gallery Image 9 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -663,22 +549,8 @@
             src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/00efff3a08b892972a21b906e839602a0bd3cca1/Mark_edited.jpg"
             alt="Extra Image 1"
           />
-           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+          <div class="info-box">
+            <p>Extra Image 1 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -695,21 +567,7 @@
             alt="Extra Image 2"
           />
           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+            <p>Extra Image 2 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -726,21 +584,7 @@
             alt="Extra Image 3"
           />
           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+            <p>Extra Image 3 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -756,22 +600,8 @@
             src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Experimental%20Philosopher.png.avif"
             alt="Extra Image 4"
           />
-         <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+          <div class="info-box">
+            <p>Extra Image 4 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -788,21 +618,7 @@
             alt="Extra Image 5"
           />
           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+            <p>Extra Image 5 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -819,21 +635,7 @@
             alt="Extra Image 6"
           />
           <div class="info-box">
-            <p>Film - On the Blunt End</p>
-            <p>
-            <p>
-            <p>
-            <p>Release - 2023</p>
-            <p>
-            <p>
-            <p>
-            <p>Role(s) - Composer, Production Mixer, Sound Designer</p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
-            <p>
+            <p>Extra Image 6 Description</p>
             <a
               href="https://example.com"
               class="see-more-button"
@@ -916,14 +718,12 @@
         });
       });
       // "Show More" Functionality
-      document
-        .getElementById('toggleMoreBtn')
-        .addEventListener('click', () => {
-          const moreGallery = document.getElementById('moreGallery');
-          moreGallery.classList.toggle('visible');
-          document.getElementById('toggleMoreBtn').textContent =
-            moreGallery.classList.contains('visible') ? 'Show Less' : 'Show More';
-        });
+      document.getElementById('toggleMoreBtn').addEventListener('click', () => {
+        const moreGallery = document.getElementById('moreGallery');
+        moreGallery.classList.toggle('visible');
+        document.getElementById('toggleMoreBtn').textContent =
+          moreGallery.classList.contains('visible') ? 'Show Less' : 'Show More';
+      });
     </script>
   </body>
 </html>
