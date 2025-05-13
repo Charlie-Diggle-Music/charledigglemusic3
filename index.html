@@ -252,7 +252,7 @@
           width: 100%;
           height: auto;
         }
-        /* Carousel: use relative positioning; ensure visibility with a minimum height */
+        /* Carousel: keep the same flex-based layout so slides slide horizontally */
         .carousel {
           position: relative;
           left: auto;
@@ -264,16 +264,17 @@
           margin: 10px auto;
           text-align: center;
           display: block;
+          overflow: hidden;
         }
         .carousel-content {
-          display: block;
+          display: flex;
+          width: 100%;
           min-height: 300px;
-          height: auto;
+          transition: transform 0.5s ease-in-out;
         }
         .slide {
-          display: block;
+          flex: 0 0 100%;
           min-height: 300px;
-          height: auto;
         }
       }
       
@@ -293,12 +294,17 @@
         margin: 10px auto;
         text-align: center;
         display: block;
+        overflow: hidden;
       }
-      .messenger-view .carousel-content,
-      .messenger-view .slide {
-        display: block;
+      .messenger-view .carousel-content {
+        display: flex;
+        width: 100%;
         min-height: 300px;
-        height: auto;
+        transition: transform 0.5s ease-in-out;
+      }
+      .messenger-view .slide {
+        flex: 0 0 100%;
+        min-height: 300px;
       }
       .messenger-view .gallery-wrapper,
       .messenger-view .overlay-grid {
@@ -707,8 +713,7 @@
       let currentIndex = 0;
       function updateCarousel() {
         const offset = -currentIndex * 100;
-        document.getElementById('carouselContent').style.transform =
-          `translateX(${offset}%)`;
+        document.getElementById('carouselContent').style.transform = `translateX(${offset}%)`;
         dots.forEach((dot, index) => {
           dot.classList.toggle('active', index === currentIndex);
         });
@@ -718,19 +723,13 @@
             const iframeSrc = iframe.src;
             if (index === currentIndex) {
               if (iframeSrc.includes("youtube.com")) {
-                iframe.contentWindow.postMessage(
-                  '{"event":"command","func":"playVideo","args":""}',
-                  '*'
-                );
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
               } else if (iframeSrc.includes("vimeo.com")) {
                 iframe.contentWindow.postMessage('{"method":"play"}','*');
               }
             } else {
               if (iframeSrc.includes("youtube.com")) {
-                iframe.contentWindow.postMessage(
-                  '{"event":"command","func":"pauseVideo","args":""}',
-                  '*'
-                );
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
               } else if (iframeSrc.includes("vimeo.com")) {
                 iframe.contentWindow.postMessage('{"method":"pause"}','*');
               }
@@ -762,7 +761,7 @@
           item.classList.toggle('active');
         });
       });
-
+      
       // "Show More" functionality for gallery.
       document.getElementById('toggleMoreBtn').addEventListener('click', () => {
         const moreGallery = document.getElementById('moreGallery');
