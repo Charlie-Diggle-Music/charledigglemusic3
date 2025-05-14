@@ -14,7 +14,7 @@
         box-sizing: border-box;
       }
       
-      /* DESKTOP / LARGE Display Defaults (Design resolution 3456×2234) */
+      /* LARGE DISPLAY DEFAULTS (for your design resolution, e.g. large Mac) */
       header {
         position: relative;
         width: 100%;
@@ -231,32 +231,28 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
       }
       
-      /* MEDIA QUERY: Smaller laptops (max-width: 1024px) - Make logo and carousel 50% smaller */
-      @media only screen and (max-width: 1024px) {
-        /* Ensure header height still fills view (you can adjust if desired) */
-        header {
-          height: 150vh !important;
-        }
-        /* Logo: 50% smaller */
+      /* MEDIA QUERY: Smaller laptops (max-width: 1440px) - Scale logo and carousel 50% smaller */
+      @media only screen and (max-width: 1440px) {
+        /* Adjust logo: 50% smaller */
         .top-image {
           top: 50px !important;
           left: 50% !important;
           transform: translateX(-50%) !important;
-          max-width: 500px !important; /* Previously up to 1000px */
+          max-width: 500px !important;  /* Reduced from 1000px */
         }
         .top-image img {
           width: 100% !important;
           max-width: 500px !important;
         }
-        /* Carousel: 50% smaller dimensions */
+        /* Adjust carousel: 50% smaller dimensions and repositioned */
         .carousel {
           position: relative !important;
-          top: 60px !important;           /* 50% of original 120px offset */
+          top: 300px !important;          /* Reduced offset (50% of original 600px would be 300px) */
           left: auto !important;
           transform: none !important;
           width: 90% !important;
-          max-width: 402.5px !important;   /* 50% of original 805px */
-          height: 259px !important;         /* 50% of original 518px */
+          max-width: 402.5px !important;    /* 50% of 805px */
+          height: 259px !important;         /* 50% of 518px */
           margin: 20px auto !important;
         }
       }
@@ -360,7 +356,7 @@
             <img src="Screenshot 2025-02-18 at 13.41.24.png" alt="Slide 4" />
           </div>
           <div class="slide">
-            <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/chargeleidglemusic3/refs/heads/main/0f0e1b_8a384dcd87a247dd8bfe62cb230c7a5b~mv2.jpg-2.avif" alt="Slide 5" />
+            <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/0f0e1b_8a384dcd87a247dd8bfe62cb230c7a5b~mv2.jpg-2.avif" alt="Slide 5" />
           </div>
         </div>
         <button class="carousel-arrow prev" id="prevArrow">&lt;</button>
@@ -411,7 +407,7 @@
         </div>
         <!-- Gallery Image 4 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charħedigglemusic3/refs/heads/main/The%20Object.jpg" alt="Gallery image 4" />
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/chariedigglemusic3/refs/heads/main/The%20Object.jpg" alt="Gallery image 4" />
           <div class="info-box">
             <p>Gallery Image 4 Description</p>
             <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
@@ -441,7 +437,7 @@
         </div>
         <!-- Gallery Image 7 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charedigglemusic3/refs/heads/main/in%20another%20life.png" alt="Gallery image 7" />
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/in%20another%20life.png" alt="Gallery image 7" />
           <div class="info-box">
             <p>Gallery Image 7 Description</p>
             <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
@@ -451,7 +447,7 @@
         </div>
         <!-- Gallery Image 8 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charedigglemusic3/refs/heads/main/Coronation%20Square.png" alt="Gallery image 8" />
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Coronation%20Square.png" alt="Gallery image 8" />
           <div class="info-box">
             <p>Gallery Image 8 Description</p>
             <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
@@ -461,7 +457,7 @@
         </div>
         <!-- Gallery Image 9 -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charedigglemusic3/refs/heads/main/Bar%20Watch.png" alt="Gallery image 9" />
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Bar%20Watch.png" alt="Gallery image 9" />
           <div class="info-box">
             <p>Gallery Image 9 Description</p>
             <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
@@ -474,7 +470,7 @@
       <div id="moreGallery" class="fade-container">
         <!-- Additional Images -->
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charedigglemusic3/refs/heads/main/Mark_edited.jpg" alt="Extra Image 1" />
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Mark_edited.jpg" alt="Extra Image 1" />
           <div class="info-box">
             <p>Extra Image 1 Description</p>
             <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
@@ -483,7 +479,7 @@
           </div>
         </div>
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charedigglemusic3/refs/heads/main/Files/Lachrymose.png.avif" alt="Extra Image 2" />
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Lachrymose.png.avif" alt="Extra Image 2" />
           <div class="info-box">
             <p>Extra Image 2 Description</p>
             <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
@@ -492,7 +488,7 @@
           </div>
         </div>
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charedigglemusic3/refs/heads/main/Files/Before%20I'm%20Gone%20Cover%20Art.png.avif" alt="Extra Image 3" />
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Before%20I'm%20Gone%20Cover%20Art.png.avif" alt="Extra Image 3" />
           <div class="info-box">
             <p>Extra Image 3 Description</p>
             <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
@@ -501,7 +497,7 @@
           </div>
         </div>
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charedigglemusic3/refs/heads/main/Files/Experimental%20Philosopher.png.avif" alt="Extra Image 4" />
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Experimental%20Philosopher.png.avif" alt="Extra Image 4" />
           <div class="info-box">
             <p>Extra Image 4 Description</p>
             <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
@@ -510,7 +506,7 @@
           </div>
         </div>
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charedigglemusic3/refs/heads/main/Files/Beyond%20the%20horizon.png.avif" alt="Extra Image 5" />
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Beyond%20the%20horizon.png.avif" alt="Extra Image 5" />
           <div class="info-box">
             <p>Extra Image 5 Description</p>
             <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
@@ -519,7 +515,7 @@
           </div>
         </div>
         <div class="grid-item">
-          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charedigglemusic3/refs/heads/main/Files/Temple.png.avif" alt="Extra Image 6" />
+          <img src="https://raw.githubusercontent.com/Charlie-Diggle-Music/charledigglemusic3/refs/heads/main/Files/Temple.png.avif" alt="Extra Image 6" />
           <div class="info-box">
             <p>Extra Image 6 Description</p>
             <a href="https://example.com" class="see-more-button" onclick="event.stopPropagation()" target="_blank" rel="noopener noreferrer">
