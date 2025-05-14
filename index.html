@@ -240,20 +240,27 @@
       /* Media Query for Smaller Laptop Screens */
       @media only screen and (max-width: 1024px) {
         header {
-          /* Reduce header height or let it adjust to content */
           height: auto;
           padding-bottom: 20px;
           position: relative;
         }
-        /* Reposition the carousel for smaller screens */
+        /* Scale down the top-image logo */
+        .top-image {
+          top: 50px;
+          max-width: 80%;
+        }
+        .top-image img {
+          max-width: 80%;
+        }
+        /* Scale down the carousel */
         .carousel {
           position: relative;
           top: 20px;
           left: auto;
           transform: none;
           width: 90%;
-          max-width: 805px;
-          height: 400px; /* Adjust height as needed */
+          max-width: 700px;
+          height: 400px;
           margin: 20px auto;
         }
       }
@@ -265,7 +272,6 @@
           padding-bottom: 20px;
           background-size: cover;
         }
-        /* Center logo in normal flow */
         .top-image {
           position: relative;
           left: auto;
@@ -279,7 +285,6 @@
           width: 100%;
           height: auto;
         }
-        /* Carousel: maintain a fixed height with a flex layout */
         .carousel {
           position: relative;
           left: auto;
@@ -307,7 +312,6 @@
           flex: 0 0 100%;
           height: 100%;
         }
-        /* Adjust gallery to display in a single column */
         .overlay-grid {
           display: block;
         }
