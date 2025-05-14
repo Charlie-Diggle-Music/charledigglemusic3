@@ -239,8 +239,9 @@
       
       /* Media Query for Smaller Laptop Screens */
       @media only screen and (max-width: 1024px) {
+        /* Expand the header height to ensure carousel fits comfortably */
         header {
-          height: auto;
+          height: 180vh;
           padding-bottom: 20px;
           position: relative;
         }
@@ -252,15 +253,15 @@
         .top-image img {
           max-width: 80%;
         }
-        /* Scale down the carousel */
+        /* Reposition and scale down the carousel */
         .carousel {
           position: relative;
-          top: 20px;
+          top: 100px;
           left: auto;
           transform: none;
           width: 90%;
           max-width: 700px;
-          height: 400px;
+          height: 450px;
           margin: 20px auto;
         }
       }
@@ -297,18 +298,13 @@
           overflow: hidden;
         }
         .carousel-content {
-          display: -webkit-box;
-          display: -webkit-flex;
           display: flex;
           width: 100%;
           height: 100%;
-          -webkit-flex-wrap: nowrap;
           flex-wrap: nowrap;
           transition: transform 0.5s ease-in-out;
         }
         .slide {
-          -webkit-box-flex: 0;
-          -webkit-flex: 0 0 100%;
           flex: 0 0 100%;
           height: 100%;
         }
@@ -340,18 +336,13 @@
         overflow: hidden;
       }
       .messenger-view .carousel-content {
-        display: -webkit-box;
-        display: -webkit-flex;
         display: flex;
         width: 100%;
         height: 100%;
-        -webkit-flex-wrap: nowrap;
         flex-wrap: nowrap;
         transition: transform 0.5s ease-in-out;
       }
       .messenger-view .slide {
-        -webkit-box-flex: 0;
-        -webkit-flex: 0 0 100%;
         flex: 0 0 100%;
         height: 100%;
       }
